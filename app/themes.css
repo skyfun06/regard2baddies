@@ -1,0 +1,173 @@
+/* ===========================================================================
+   PALETTES DE THÈME
+   ---------------------------------------------------------------------------
+   Chaque thème ne fait que redéfinir les variables sémantiques.
+   Pour changer la palette de toute l'app : mettre l'attribut correspondant sur
+   la balise <html>, par ex. <html data-theme="violet">.
+
+   La valeur active est stockée en base (reglages.theme_actif) et appliquée
+   dans app/layout.tsx.
+
+   Thèmes de base       : rose · violet · jaune · bleu
+   Variantes saisonnières : noel · halloween · printemps · ete
+   =========================================================================== */
+
+/* --- Rose (défaut, aussi défini dans :root pour éviter le flash) ---------- */
+[data-theme="rose"] {
+  --background: #fff5f7;
+  --foreground: #2b1a20;
+  --surface: #ffffff;
+  --surface-foreground: #2b1a20;
+  --muted: #f7e6ec;
+  --muted-foreground: #8a6b76;
+  --border: #f0d4dd;
+  --primary: #e84f8a;
+  --primary-foreground: #ffffff;
+  --secondary: #f9a8c8;
+  --secondary-foreground: #2b1a20;
+  --accent: #ffd166;
+  --accent-foreground: #2b1a20;
+  --success: #3fb984;
+  --danger: #e5484d;
+  --ring: #e84f8a;
+}
+
+/* --- Violet --------------------------------------------------------------- */
+[data-theme="violet"] {
+  --background: #f7f3ff;
+  --foreground: #241a33;
+  --surface: #ffffff;
+  --surface-foreground: #241a33;
+  --muted: #ece3fb;
+  --muted-foreground: #6f6191;
+  --border: #ddd0f5;
+  --primary: #7c4dff;
+  --primary-foreground: #ffffff;
+  --secondary: #b79dff;
+  --secondary-foreground: #241a33;
+  --accent: #ff9edb;
+  --accent-foreground: #241a33;
+  --success: #3fb984;
+  --danger: #e5484d;
+  --ring: #7c4dff;
+}
+
+/* --- Jaune ---------------------------------------------------------------- */
+[data-theme="jaune"] {
+  --background: #fffbf0;
+  --foreground: #3a2f14;
+  --surface: #ffffff;
+  --surface-foreground: #3a2f14;
+  --muted: #fdf3d3;
+  --muted-foreground: #8a7748;
+  --border: #f5e6b0;
+  --primary: #f5b301;
+  --primary-foreground: #3a2f14;
+  --secondary: #ffe08a;
+  --secondary-foreground: #3a2f14;
+  --accent: #ff8fab;
+  --accent-foreground: #3a2f14;
+  --success: #3fb984;
+  --danger: #e5484d;
+  --ring: #f5b301;
+}
+
+/* --- Bleu ----------------------------------------------------------------- */
+[data-theme="bleu"] {
+  --background: #f1f8ff;
+  --foreground: #142433;
+  --surface: #ffffff;
+  --surface-foreground: #142433;
+  --muted: #e0eefb;
+  --muted-foreground: #5c7891;
+  --border: #cbe1f5;
+  --primary: #2f80ed;
+  --primary-foreground: #ffffff;
+  --secondary: #9dc7ff;
+  --secondary-foreground: #142433;
+  --accent: #56ccf2;
+  --accent-foreground: #142433;
+  --success: #3fb984;
+  --danger: #e5484d;
+  --ring: #2f80ed;
+}
+
+/* --- Noël (variante saisonnière) ------------------------------------------ */
+[data-theme="noel"] {
+  --background: #f6fbf6;
+  --foreground: #14231a;
+  --surface: #ffffff;
+  --surface-foreground: #14231a;
+  --muted: #e2f0e6;
+  --muted-foreground: #5c7a66;
+  --border: #cfe6d6;
+  --primary: #c0392b;
+  --primary-foreground: #ffffff;
+  --secondary: #1e824c;
+  --secondary-foreground: #ffffff;
+  --accent: #f2c94c;
+  --accent-foreground: #14231a;
+  --success: #3fb984;
+  --danger: #e5484d;
+  --ring: #c0392b;
+}
+
+/* --- Halloween (variante saisonnière) ------------------------------------- */
+[data-theme="halloween"] {
+  --background: #1c1420;
+  --foreground: #f5ecf5;
+  --surface: #2a1f31;
+  --surface-foreground: #f5ecf5;
+  --muted: #35283f;
+  --muted-foreground: #b7a3c4;
+  --border: #43314f;
+  --primary: #ff7518;
+  --primary-foreground: #1c1420;
+  --secondary: #8e44ad;
+  --secondary-foreground: #ffffff;
+  --accent: #a5d90f;
+  --accent-foreground: #1c1420;
+  --success: #3fb984;
+  --danger: #e5484d;
+  --ring: #ff7518;
+}
+
+/* --- Printemps (variante saisonnière) ------------------------------------- */
+[data-theme="printemps"] {
+  --background: #f4fbf3;
+  --foreground: #23331f;
+  --surface: #ffffff;
+  --surface-foreground: #23331f;
+  --muted: #e6f4e0;
+  --muted-foreground: #6f8a63;
+  --border: #d4ecc9;
+  --primary: #7ac74f;
+  --primary-foreground: #23331f;
+  --secondary: #ffb7d5;
+  --secondary-foreground: #23331f;
+  --accent: #ffd166;
+  --accent-foreground: #23331f;
+  --success: #3fb984;
+  --danger: #e5484d;
+  --ring: #7ac74f;
+}
+
+/* --- Été (variante saisonnière) ------------------------------------------- */
+[data-theme="ete"] {
+  --background: #fef8f0;
+  --foreground: #33240f;
+  --surface: #ffffff;
+  --surface-foreground: #33240f;
+  --muted: #fdeede;
+  --muted-foreground: #97794f;
+  --border: #f7ddb8;
+  --primary: #ff8c42;
+  --primary-foreground: #ffffff;
+  --secondary: #ffd166;
+  --secondary-foreground: #33240f;
+  --accent: #06b6d4;
+  --accent-foreground: #ffffff;
+  --success: #3fb984;
+  --danger: #e5484d;
+  --ring: #ff8c42;
+}

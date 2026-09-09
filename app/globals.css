@@ -1,26 +1,72 @@
 @import "tailwindcss";
+@import "./themes.css";
 
+/* ===========================================================================
+   THÈME — source unique de vérité des couleurs
+   ---------------------------------------------------------------------------
+   Toutes les couleurs de l'app passent par ces variables sémantiques.
+   Les valeurs réelles (rose, violet, jaune, bleu, saisonnières…) sont définies
+   dans themes.css et sélectionnées via l'attribut `data-theme` sur <html>.
+
+   `:root` ci-dessous = valeurs par défaut (palette "rose"), utilisées tant
+   qu'aucun data-theme n'est appliqué (évite tout flash au chargement).
+   =========================================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fff5f7;
+  --foreground: #2b1a20;
+  --surface: #ffffff;
+  --surface-foreground: #2b1a20;
+  --muted: #f7e6ec;
+  --muted-foreground: #8a6b76;
+  --border: #f0d4dd;
+  --primary: #e84f8a;
+  --primary-foreground: #ffffff;
+  --secondary: #f9a8c8;
+  --secondary-foreground: #2b1a20;
+  --accent: #ffd166;
+  --accent-foreground: #2b1a20;
+  --success: #3fb984;
+  --danger: #e5484d;
+  --ring: #e84f8a;
 }
 
+/* ---------------------------------------------------------------------------
+   Pont vers Tailwind v4 : expose les variables comme utilitaires.
+   -> bg-primary, text-primary, border-border, bg-surface, ring-ring, etc.
+   Comme on utilise `inline` + var(), changer --primary met à jour toutes les
+   classes instantanément.
+   --------------------------------------------------------------------------- */
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-success: var(--success);
+  --color-danger: var(--danger);
+  --color-ring: var(--ring);
+
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Transition douce lors d'un changement de thème */
+:root {
+  --theme-transition: background-color 0.3s ease, color 0.3s ease,
+    border-color 0.3s ease;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+  -webkit-tap-highlight-color: transparent; /* mobile : pas de flash au tap */
 }
