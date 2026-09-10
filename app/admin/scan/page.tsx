@@ -1,9 +1,11 @@
-/** Scanner (placeholder). */
-export default function ScanPage() {
-  return (
-    <section>
-      <h1 className="text-lg font-semibold">Scanner</h1>
-      <p className="mt-1 text-sm text-muted-foreground">À construire.</p>
-    </section>
-  );
+import { requireAdmin } from "@/lib/supabase/auth";
+import Scanner from "./scanner";
+
+/**
+ * Page scanner (admin). La caméra et l'enregistrement des passages sont gérés
+ * par le composant client <Scanner /> ; ici on garantit seulement l'accès admin.
+ */
+export default async function ScanPage() {
+  await requireAdmin();
+  return <Scanner />;
 }

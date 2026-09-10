@@ -1,3 +1,4 @@
+import QRCode from "qrcode";
 import { redirect } from "next/navigation";
 import { createClient } from "@/lib/supabase/server";
 import { getRole } from "@/lib/supabase/auth";
@@ -39,27 +40,44 @@ export default async function CartePage() {
     );
   }
 
-  // Nombre de passages (RLS : uniquement ceux de cette cliente).
-  const { count } = await supabase
-    .from("passages")
-    .select("*", { count: "exact", head: true })
-    .eq("cliente_id", cliente.id);
+  // Compteurs (RLS : uniquement les données de cette cliente).
+  const [{ count: nbPassages }, { count: nbRecompenses }, { data: reglages }] =
+    await Promise.all([
+      supabase
+        .from("passages")
+        .select("*", { count: "exact", head: true })
+        .eq("cliente_id", cliente.id),
+      supabase
+        .from("recompenses")
+        .select("*", { count: "exact", head: true })
+        .eq("cliente_id", cliente.id),
+      supabase
+        .from("reglages")
+        .select("seuil_passages, valeur_recompense")
+        .maybeSingle(),
+    ]);
 
-  // Réglages (seuil de passages, valeur de la récompense).
-  const { data: reglages } = await supabase
-    .from("reglages")
-    .select("seuil_passages, valeur_recompense")
-    .maybeSingle();
-
-  const total = count ?? 0;
-  const seuil = reglages?.seuil_passages ?? 5;
+  const total = nbPassages ?? 0;
+  const utilisees = nbRecompenses ?? 0;
+  const seuil = Math.max(1, reglages?.seuil_passages ?? 5);
   const valeur = reglages?.valeur_recompense ?? 20;
 
-  // Progression dans le cycle courant.
-  const dansCycle = total % seuil;
-  const recompensePrete = total > 0 && dansCycle === 0;
-  const remplies = recompensePrete ? seuil : dansCycle;
-  const restants = recompensePrete ? 0 : seuil - dansCycle;
+  // Même logique que le scanner admin (source de vérité partagée) :
+  // passages actifs = total - récompenses déjà utilisées * seuil.
+  const effectif = Math.max(0, total - utilisees * seuil);
+  const disponibles = Math.floor(effectif / seuil);
+  const progression = effectif - disponibles * seuil;
+  const recompensePrete = disponibles >= 1;
+  const remplies = recompensePrete ? seuil : progression;
+  const restants = recompensePrete ? 0 : seuil - progression;
+
+  // QR code encodant le token (généré côté serveur, sans JS client).
+  const qrSvg = await QRCode.toString(cliente.token, {
+    type: "svg",
+    margin: 1,
+    errorCorrectionLevel: "M",
+    color: { dark: "#2b1a20", light: "#ffffff" },
+  });
 
   return (
     <main className="flex flex-1 flex-col items-center p-6">
@@ -123,7 +141,12 @@ export default async function CartePage() {
           <p className="mt-1 text-xs text-muted-foreground">
             Montre-le à Léa à chaque passage.
           </p>
-          <div className="mt-4 break-all rounded-xl bg-muted px-4 py-3 font-mono text-sm tracking-wider">
+          <div
+            className="mx-auto mt-4 w-48 [&>svg]:h-auto [&>svg]:w-full"
+            // QR généré côté serveur : contenu SVG sûr (pas d'entrée utilisateur).
+            dangerouslySetInnerHTML={{ __html: qrSvg }}
+          />
+          <div className="mt-4 break-all rounded-xl bg-muted px-4 py-2 font-mono text-xs tracking-wider text-muted-foreground">
             {cliente.token}
           </div>
         </section>

@@ -37,6 +37,35 @@ export type Reglages = {
   updated_at: string;
 };
 
+/** Ligne de la table `recompenses` (une récompense utilisée / remise). */
+export type Recompense = {
+  id: string;
+  cliente_id: string;
+  utilisee_le: string;
+  enregistre_par: string | null;
+};
+
+/**
+ * État d'une cliente affiché côté scanner admin après lecture du code.
+ * Toutes les valeurs sont dérivées côté serveur (source de vérité).
+ */
+export type ScanInfo = {
+  clienteId: string;
+  prenom: string;
+  totalPassages: number; // total historique (toutes cartes confondues)
+  seuil: number; // passages requis pour une récompense
+  valeurRecompense: number; // valeur en € de la récompense
+  remplies: number; // cases remplies dans le cycle courant
+  restants: number; // passages restants avant la prochaine récompense
+  recompensesDisponibles: number; // récompenses acquises non encore utilisées
+  historique: { id: string; created_at: string }[]; // derniers passages
+};
+
+/** Résultat d'une action scan : succès (avec info) ou échec (message). */
+export type ScanResult =
+  | { ok: true; info: ScanInfo }
+  | { ok: false; error: string };
+
 /** Résultat de la fonction RPC `get_carte_by_token` (accès public à la carte). */
 export type CarteCliente = {
   prenom: string;

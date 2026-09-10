@@ -60,6 +60,26 @@ create index if not exists passages_cliente_id_idx
   on public.passages (cliente_id);
 
 -- ---------------------------------------------------------------------------
+-- Table : recompenses (récompenses UTILISÉES / remises à la cliente)
+-- ---------------------------------------------------------------------------
+-- Chaque ligne = une récompense encaissée par la cliente. On ne stocke pas les
+-- récompenses "disponibles" (elles se déduisent du nombre de passages), mais
+-- uniquement celles réellement utilisées, afin de remettre le cycle à zéro.
+--
+-- Progression du cycle courant :
+--   cases_remplies = nb_passages - (nb_recompenses_utilisees * seuil_passages)
+create table if not exists public.recompenses (
+  id             uuid        primary key default gen_random_uuid(),
+  cliente_id     uuid        not null
+                 references public.clientes(id) on delete cascade,
+  utilisee_le    timestamptz not null default now(),   -- quand elle a été remise
+  enregistre_par uuid        references auth.users(id)  -- qui l'a marquée utilisée
+);
+
+create index if not exists recompenses_cliente_id_idx
+  on public.recompenses (cliente_id);
+
+-- ---------------------------------------------------------------------------
 -- Table : reglages (ligne unique de configuration)
 -- ---------------------------------------------------------------------------
 -- Astuce "single row" : clé primaire booléenne contrainte à `true`,
@@ -99,10 +119,11 @@ grant execute on function public.is_admin() to authenticated;
 -- ===========================================================================
 -- Row Level Security
 -- ===========================================================================
-alter table public.admins   enable row level security;
-alter table public.clientes enable row level security;
-alter table public.passages enable row level security;
-alter table public.reglages enable row level security;
+alter table public.admins      enable row level security;
+alter table public.clientes    enable row level security;
+alter table public.passages    enable row level security;
+alter table public.recompenses enable row level security;
+alter table public.reglages    enable row level security;
 
 -- --- admins : seul un admin peut lire la liste des admins ------------------
 drop policy if exists "admins_select_admin" on public.admins;
@@ -148,6 +169,24 @@ create policy "passages_select_self" on public.passages
     exists (
       select 1 from public.clientes c
       where c.id = passages.cliente_id and c.user_id = auth.uid()
+    )
+  );
+
+-- --- recompenses -----------------------------------------------------------
+-- Seul l'admin crée/modifie les récompenses (marquer "utilisée" au comptoir).
+drop policy if exists "recompenses_admin_all" on public.recompenses;
+create policy "recompenses_admin_all" on public.recompenses
+  for all to authenticated
+  using (public.is_admin()) with check (public.is_admin());
+
+-- Une cliente lit uniquement les récompenses rattachées à SA fiche.
+drop policy if exists "recompenses_select_self" on public.recompenses;
+create policy "recompenses_select_self" on public.recompenses
+  for select to authenticated
+  using (
+    exists (
+      select 1 from public.clientes c
+      where c.id = recompenses.cliente_id and c.user_id = auth.uid()
     )
   );
 
