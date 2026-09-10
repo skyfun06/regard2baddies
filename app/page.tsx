@@ -1,16 +1,15 @@
+import { redirect } from "next/navigation";
+import { getRole } from "@/lib/supabase/auth";
+
 /**
- * Carte cliente — page d'accueil, accès par token.
- * (Placeholder : la logique d'accès par token sera ajoutée plus tard.)
+ * Racine `/` : simple aiguillage selon le rôle.
+ *  - admin   -> /admin
+ *  - cliente -> /carte
+ *  - anonyme -> /login
  */
-export default function CartePage() {
-  return (
-    <main className="flex flex-1 items-center justify-center p-6">
-      <div className="w-full max-w-sm rounded-2xl border border-border bg-surface p-6 text-center shadow-sm">
-        <h1 className="text-xl font-semibold text-primary">Regard2Baddies</h1>
-        <p className="mt-2 text-sm text-muted-foreground">
-          Carte de fidélité — accès par token (à venir)
-        </p>
-      </div>
-    </main>
-  );
+export default async function Home() {
+  const role = await getRole();
+  if (role === "admin") redirect("/admin");
+  if (role === "cliente") redirect("/carte");
+  redirect("/login");
 }

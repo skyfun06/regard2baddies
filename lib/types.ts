@@ -9,8 +9,18 @@ export type Cliente = {
   prenom: string;
   telephone: string | null;
   token: string;
+  user_id: string | null; // lien vers le compte Auth de la cliente
   created_at: string;
 };
+
+/** Ligne de la table `admins` (comptes administrateurs). */
+export type Admin = {
+  user_id: string;
+  created_at: string;
+};
+
+/** Rôle applicatif de l'utilisateur connecté. */
+export type Role = "admin" | "cliente" | null;
 
 export type Passage = {
   id: string;
