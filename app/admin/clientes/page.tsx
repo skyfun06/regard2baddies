@@ -19,7 +19,7 @@ export default async function ClientesPage({
   return (
     <section className="space-y-5">
       <div className="flex items-baseline justify-between gap-3">
-        <h1 className="text-lg font-semibold">Clientes</h1>
+        <h1 className="y2k-display text-2xl text-primary">Clientes</h1>
         <span className="text-sm text-muted-foreground">
           {clientes.length} au total
         </span>
@@ -33,11 +33,11 @@ export default async function ClientesPage({
           defaultValue={q}
           placeholder="Rechercher un prénom…"
           aria-label="Rechercher un prénom"
-          className="min-w-0 flex-1 rounded-xl border border-border bg-surface px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
+          className="y2k-input min-w-0 flex-1 px-3 py-2 text-sm"
         />
         <button
           type="submit"
-          className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+          className="y2k-btn px-4 py-2 text-sm"
         >
           Chercher
         </button>
@@ -55,11 +55,11 @@ export default async function ClientesPage({
       </div>
 
       {clientes.length === 0 ? (
-        <p className="rounded-2xl border border-border bg-surface p-6 text-center text-sm text-muted-foreground">
+        <p className="y2k-card p-6 text-center text-sm text-muted-foreground">
           Aucune cliente ne correspond.
         </p>
       ) : (
-        <ul className="divide-y divide-border overflow-hidden rounded-2xl border border-border bg-surface">
+        <ul className="y2k-card divide-y divide-border overflow-hidden">
           {clientes.map((c) => {
             const prete = c.recompensesDisponibles >= 1;
             return (
@@ -124,10 +124,10 @@ function FiltreLien({
     <Link
       href={href}
       className={
-        "rounded-full border px-3 py-1 transition " +
+        "rounded-full border-2 px-3 py-1 transition " +
         (actif
-          ? "border-primary bg-primary/10 font-medium text-primary"
-          : "border-border text-muted-foreground hover:bg-muted")
+          ? "border-primary bg-primary/10 font-semibold text-primary shadow-[0_3px_0_rgba(0,0,0,0.08)]"
+          : "border-border bg-surface text-muted-foreground hover:border-primary hover:text-primary")
       }
     >
       {label}

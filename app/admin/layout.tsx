@@ -16,21 +16,33 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-10 border-b border-border bg-surface/90 backdrop-blur print:hidden">
-        <nav className="mx-auto flex max-w-2xl flex-wrap items-center gap-x-4 gap-y-2 p-4 text-sm">
-          <Link href="/admin" className="font-semibold text-primary">
-            Admin
+      <header className="sticky top-0 z-10 border-b-2 border-white bg-surface/85 backdrop-blur print:hidden">
+        <nav className="mx-auto flex max-w-2xl flex-wrap items-center gap-x-3 gap-y-2 p-4 text-sm">
+          <Link href="/admin" className="y2k-display text-lg text-primary">
+            Admin ✦
           </Link>
-          <Link href="/admin/scan" className="text-muted-foreground">
+          <Link
+            href="/admin/scan"
+            className="y2k-chip text-muted-foreground transition hover:text-primary"
+          >
             Scanner
           </Link>
-          <Link href="/admin/clientes" className="text-muted-foreground">
+          <Link
+            href="/admin/clientes"
+            className="y2k-chip text-muted-foreground transition hover:text-primary"
+          >
             Clientes
           </Link>
-          <Link href="/admin/reglages" className="text-muted-foreground">
+          <Link
+            href="/admin/reglages"
+            className="y2k-chip text-muted-foreground transition hover:text-primary"
+          >
             Réglages
           </Link>
-          <Link href="/admin/qr" className="text-muted-foreground">
+          <Link
+            href="/admin/qr"
+            className="y2k-chip text-muted-foreground transition hover:text-primary"
+          >
             QR
           </Link>
           <form action={logout} className="ml-auto">

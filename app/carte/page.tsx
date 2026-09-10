@@ -26,7 +26,7 @@ export default async function CartePage() {
     // Compte connecté sans fiche cliente : cas anormal (à traiter avec Léa).
     return (
       <main className="flex flex-1 items-center justify-center p-6">
-        <div className="w-full max-w-sm rounded-2xl border border-border bg-surface p-6 text-center shadow-sm">
+        <div className="y2k-card w-full max-w-sm p-6 text-center">
           <p className="text-sm text-muted-foreground">
             Ta carte n&apos;est pas encore initialisée. Préviens Léa.
           </p>
@@ -76,17 +76,36 @@ export default async function CartePage() {
     type: "svg",
     margin: 1,
     errorCorrectionLevel: "M",
-    color: { dark: "#2b1a20", light: "#ffffff" },
+    color: { dark: "#3b0f33", light: "#ffffff" },
   });
 
   return (
-    <main className="flex flex-1 flex-col items-center p-6">
+    <main className="relative flex flex-1 flex-col items-center overflow-hidden p-6">
+      {/* Étoiles décoratives */}
+      <span aria-hidden className="sparkle left-[6%] top-[8%] text-xl">
+        ✦
+      </span>
+      <span
+        aria-hidden
+        className="sparkle sparkle-accent right-[8%] top-[16%] text-sm [animation-delay:0.8s]"
+      >
+        ✦
+      </span>
+      <span
+        aria-hidden
+        className="sparkle sparkle-primary bottom-[14%] left-[10%] text-lg [animation-delay:1.4s]"
+      >
+        ✦
+      </span>
+
       <div className="w-full max-w-sm space-y-6">
         {/* En-tête */}
-        <header className="flex items-center justify-between">
+        <header className="flex items-end justify-between">
           <div>
-            <p className="text-sm text-muted-foreground">Ta carte</p>
-            <h1 className="text-2xl font-bold text-primary">
+            <span className="y2k-chip text-xs font-medium text-muted-foreground">
+              ✦ Ta carte
+            </span>
+            <h1 className="y2k-display mt-2 text-4xl text-primary [text-shadow:0_3px_0_rgba(255,255,255,.9)]">
               {cliente.prenom}
             </h1>
           </div>
@@ -97,23 +116,18 @@ export default async function CartePage() {
           </form>
         </header>
 
-        {/* Cases de fidélité */}
-        <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+        {/* Cases de fidélité — le sticker signature */}
+        <section className="y2k-card p-6">
           <div className="grid grid-cols-5 gap-3">
             {Array.from({ length: seuil }).map((_, i) => {
               const active = i < remplies;
               return (
                 <div
                   key={i}
-                  className={
-                    "flex aspect-square items-center justify-center rounded-full border text-lg font-semibold " +
-                    (active
-                      ? "border-primary bg-primary text-primary-foreground"
-                      : "border-border bg-muted text-muted-foreground")
-                  }
+                  className={"y2k-slot" + (active ? " y2k-slot-on" : "")}
                   aria-label={active ? "Passage validé" : "Case vide"}
                 >
-                  {active ? "★" : ""}
+                  {active ? "✦" : ""}
                 </div>
               );
             })}
@@ -121,13 +135,15 @@ export default async function CartePage() {
 
           <p className="mt-5 text-center text-sm">
             {recompensePrete ? (
-              <span className="font-semibold text-success">
+              <span className="y2k-display text-base text-success">
                 🎉 Récompense débloquée : {valeur} € offerts !
               </span>
             ) : (
               <>
                 Encore{" "}
-                <span className="font-semibold text-primary">{restants}</span>{" "}
+                <span className="y2k-display text-lg text-primary">
+                  {restants}
+                </span>{" "}
                 passage{restants > 1 ? "s" : ""} avant ta récompense de{" "}
                 <span className="font-semibold">{valeur} €</span>.
               </>
@@ -136,16 +152,18 @@ export default async function CartePage() {
         </section>
 
         {/* Code à faire scanner par Léa */}
-        <section className="rounded-2xl border border-border bg-surface p-6 text-center shadow-sm">
-          <p className="text-sm font-medium">Ton code à faire scanner</p>
+        <section className="y2k-card p-6 text-center">
+          <p className="y2k-display text-lg text-primary">Ton code</p>
           <p className="mt-1 text-xs text-muted-foreground">
             Montre-le à Léa à chaque passage.
           </p>
-          <div
-            className="mx-auto mt-4 w-48 [&>svg]:h-auto [&>svg]:w-full"
-            // QR généré côté serveur : contenu SVG sûr (pas d'entrée utilisateur).
-            dangerouslySetInnerHTML={{ __html: qrSvg }}
-          />
+          <div className="mx-auto mt-4 w-48 rounded-2xl border-2 border-border bg-white p-3 shadow-[0_4px_0_rgba(0,0,0,0.06)]">
+            <div
+              className="[&>svg]:h-auto [&>svg]:w-full"
+              // QR généré côté serveur : contenu SVG sûr (pas d'entrée utilisateur).
+              dangerouslySetInnerHTML={{ __html: qrSvg }}
+            />
+          </div>
           <div className="mt-4 break-all rounded-xl bg-muted px-4 py-2 font-mono text-xs tracking-wider text-muted-foreground">
             {cliente.token}
           </div>

@@ -28,13 +28,13 @@ export default async function QrPage() {
     type: "svg",
     margin: 1,
     errorCorrectionLevel: "M",
-    color: { dark: "#2b1a20", light: "#ffffff" },
+    color: { dark: "#3b0f33", light: "#ffffff" },
   });
 
   return (
     <section className="space-y-5">
       <div className="flex items-baseline justify-between gap-3 print:hidden">
-        <h1 className="text-lg font-semibold">QR d&apos;inscription</h1>
+        <h1 className="y2k-display text-2xl text-primary">QR d&apos;inscription</h1>
         <PrintButton />
       </div>
       <p className="text-sm text-muted-foreground print:hidden">
@@ -43,8 +43,8 @@ export default async function QrPage() {
       </p>
 
       {/* Carte imprimable : centrée et sobre pour le papier. */}
-      <div className="mx-auto max-w-xs rounded-2xl border border-border bg-surface p-8 text-center shadow-sm print:border-0 print:shadow-none">
-        <p className="text-lg font-bold text-primary">Regard2Baddies</p>
+      <div className="y2k-card mx-auto max-w-xs p-8 text-center print:border-0 print:shadow-none">
+        <p className="y2k-wordmark text-2xl">Regard2Baddies</p>
         <p className="mt-1 text-sm text-muted-foreground">
           Scanne-moi pour ta carte de fidélité
         </p>

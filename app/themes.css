@@ -1,5 +1,5 @@
 /* ===========================================================================
-   PALETTES DE THÈME
+   PALETTES DE THÈME — édition Y2K
    ---------------------------------------------------------------------------
    Chaque thème ne fait que redéfinir les variables sémantiques.
    Pour changer la palette de toute l'app : mettre l'attribut correspondant sur
@@ -8,166 +8,169 @@
    La valeur active est stockée en base (reglages.theme_actif) et appliquée
    dans app/layout.tsx.
 
-   Thèmes de base       : rose · violet · jaune · bleu
+   Thèmes de base        : rose · violet · jaune · bleu
    Variantes saisonnières : noel · halloween · printemps · ete
+
+   Les halos du fond (globals.css) sont dérivés de --primary / --secondary /
+   --accent via color-mix : chaque palette garde donc son ambiance propre.
    =========================================================================== */
 
-/* --- Rose (défaut, aussi défini dans :root pour éviter le flash) ---------- */
+/* --- Rose "Bubblegum" (défaut, aussi défini dans :root) ------------------- */
 [data-theme="rose"] {
-  --background: #fff5f7;
-  --foreground: #2b1a20;
+  --background: #ffd9ef;
+  --foreground: #3b0f33;
   --surface: #ffffff;
-  --surface-foreground: #2b1a20;
-  --muted: #f7e6ec;
-  --muted-foreground: #8a6b76;
-  --border: #f0d4dd;
-  --primary: #e84f8a;
+  --surface-foreground: #3b0f33;
+  --muted: #ffe6f4;
+  --muted-foreground: #91517b;
+  --border: #ffaede;
+  --primary: #ff2da2;
   --primary-foreground: #ffffff;
-  --secondary: #f9a8c8;
-  --secondary-foreground: #2b1a20;
-  --accent: #ffd166;
-  --accent-foreground: #2b1a20;
-  --success: #3fb984;
-  --danger: #e5484d;
-  --ring: #e84f8a;
+  --secondary: #c08bff;
+  --secondary-foreground: #3b0f33;
+  --accent: #62e0ff;
+  --accent-foreground: #123047;
+  --success: #16a56f;
+  --danger: #ff3b5c;
+  --ring: #ff2da2;
 }
 
-/* --- Violet --------------------------------------------------------------- */
+/* --- Violet "Ultraviolet" -------------------------------------------------- */
 [data-theme="violet"] {
-  --background: #f7f3ff;
-  --foreground: #241a33;
+  --background: #e8daff;
+  --foreground: #26103f;
   --surface: #ffffff;
-  --surface-foreground: #241a33;
-  --muted: #ece3fb;
-  --muted-foreground: #6f6191;
-  --border: #ddd0f5;
-  --primary: #7c4dff;
+  --surface-foreground: #26103f;
+  --muted: #f0e6ff;
+  --muted-foreground: #6f5595;
+  --border: #d0b3ff;
+  --primary: #8f37ff;
   --primary-foreground: #ffffff;
-  --secondary: #b79dff;
-  --secondary-foreground: #241a33;
-  --accent: #ff9edb;
-  --accent-foreground: #241a33;
-  --success: #3fb984;
-  --danger: #e5484d;
-  --ring: #7c4dff;
+  --secondary: #ff7ae0;
+  --secondary-foreground: #26103f;
+  --accent: #7df9ff;
+  --accent-foreground: #0c3236;
+  --success: #16a56f;
+  --danger: #ff3b5c;
+  --ring: #8f37ff;
 }
 
-/* --- Jaune ---------------------------------------------------------------- */
+/* --- Jaune "Citrus pop" ---------------------------------------------------- */
 [data-theme="jaune"] {
-  --background: #fffbf0;
-  --foreground: #3a2f14;
+  --background: #fff1bd;
+  --foreground: #3d2c05;
   --surface: #ffffff;
-  --surface-foreground: #3a2f14;
-  --muted: #fdf3d3;
-  --muted-foreground: #8a7748;
-  --border: #f5e6b0;
-  --primary: #f5b301;
-  --primary-foreground: #3a2f14;
-  --secondary: #ffe08a;
-  --secondary-foreground: #3a2f14;
-  --accent: #ff8fab;
-  --accent-foreground: #3a2f14;
-  --success: #3fb984;
-  --danger: #e5484d;
-  --ring: #f5b301;
+  --surface-foreground: #3d2c05;
+  --muted: #fff6d6;
+  --muted-foreground: #8a7433;
+  --border: #ffdf80;
+  --primary: #ffb300;
+  --primary-foreground: #3d2c05;
+  --secondary: #ff8fc7;
+  --secondary-foreground: #3d2c05;
+  --accent: #7de1ff;
+  --accent-foreground: #0c3244;
+  --success: #16a56f;
+  --danger: #ff3b5c;
+  --ring: #ffb300;
 }
 
-/* --- Bleu ----------------------------------------------------------------- */
+/* --- Bleu "Glacier" -------------------------------------------------------- */
 [data-theme="bleu"] {
-  --background: #f1f8ff;
-  --foreground: #142433;
+  --background: #cfeaff;
+  --foreground: #0b2540;
   --surface: #ffffff;
-  --surface-foreground: #142433;
-  --muted: #e0eefb;
-  --muted-foreground: #5c7891;
-  --border: #cbe1f5;
-  --primary: #2f80ed;
+  --surface-foreground: #0b2540;
+  --muted: #e2f2ff;
+  --muted-foreground: #4a6d8f;
+  --border: #a5d5f9;
+  --primary: #0f8bff;
   --primary-foreground: #ffffff;
-  --secondary: #9dc7ff;
-  --secondary-foreground: #142433;
-  --accent: #56ccf2;
-  --accent-foreground: #142433;
-  --success: #3fb984;
-  --danger: #e5484d;
-  --ring: #2f80ed;
+  --secondary: #8fd6ff;
+  --secondary-foreground: #0b2540;
+  --accent: #ff7ad9;
+  --accent-foreground: #3b0f33;
+  --success: #16a56f;
+  --danger: #ff3b5c;
+  --ring: #0f8bff;
 }
 
-/* --- Noël (variante saisonnière) ------------------------------------------ */
+/* --- Noël "Candy cane" (variante saisonnière) ------------------------------ */
 [data-theme="noel"] {
-  --background: #f6fbf6;
-  --foreground: #14231a;
+  --background: #ffe3e6;
+  --foreground: #3a0d16;
   --surface: #ffffff;
-  --surface-foreground: #14231a;
-  --muted: #e2f0e6;
-  --muted-foreground: #5c7a66;
-  --border: #cfe6d6;
-  --primary: #c0392b;
+  --surface-foreground: #3a0d16;
+  --muted: #ffeef0;
+  --muted-foreground: #97565f;
+  --border: #ffb8c0;
+  --primary: #ff2e4d;
   --primary-foreground: #ffffff;
-  --secondary: #1e824c;
+  --secondary: #00b370;
   --secondary-foreground: #ffffff;
-  --accent: #f2c94c;
-  --accent-foreground: #14231a;
-  --success: #3fb984;
+  --accent: #ffcf4d;
+  --accent-foreground: #3a2c05;
+  --success: #16a56f;
   --danger: #e5484d;
-  --ring: #c0392b;
+  --ring: #ff2e4d;
 }
 
-/* --- Halloween (variante saisonnière) ------------------------------------- */
+/* --- Halloween "Cyber goth" (variante saisonnière) ------------------------- */
 [data-theme="halloween"] {
-  --background: #1c1420;
-  --foreground: #f5ecf5;
-  --surface: #2a1f31;
-  --surface-foreground: #f5ecf5;
-  --muted: #35283f;
-  --muted-foreground: #b7a3c4;
-  --border: #43314f;
-  --primary: #ff7518;
-  --primary-foreground: #1c1420;
-  --secondary: #8e44ad;
+  --background: #1a0b24;
+  --foreground: #ffe9ff;
+  --surface: #2b1440;
+  --surface-foreground: #ffe9ff;
+  --muted: #381a54;
+  --muted-foreground: #c9a3e0;
+  --border: #4a2766;
+  --primary: #ff7a00;
+  --primary-foreground: #1a0b24;
+  --secondary: #b455ff;
   --secondary-foreground: #ffffff;
-  --accent: #a5d90f;
-  --accent-foreground: #1c1420;
-  --success: #3fb984;
-  --danger: #e5484d;
-  --ring: #ff7518;
+  --accent: #b6ff2e;
+  --accent-foreground: #1a0b24;
+  --success: #35d08a;
+  --danger: #ff5a76;
+  --ring: #ff7a00;
 }
 
-/* --- Printemps (variante saisonnière) ------------------------------------- */
+/* --- Printemps "Pixel garden" (variante saisonnière) ----------------------- */
 [data-theme="printemps"] {
-  --background: #f4fbf3;
-  --foreground: #23331f;
+  --background: #d9ffe1;
+  --foreground: #123a22;
   --surface: #ffffff;
-  --surface-foreground: #23331f;
-  --muted: #e6f4e0;
-  --muted-foreground: #6f8a63;
-  --border: #d4ecc9;
-  --primary: #7ac74f;
-  --primary-foreground: #23331f;
-  --secondary: #ffb7d5;
-  --secondary-foreground: #23331f;
-  --accent: #ffd166;
-  --accent-foreground: #23331f;
-  --success: #3fb984;
-  --danger: #e5484d;
-  --ring: #7ac74f;
+  --surface-foreground: #123a22;
+  --muted: #eafff0;
+  --muted-foreground: #4f8a63;
+  --border: #a8f0bd;
+  --primary: #21c45d;
+  --primary-foreground: #ffffff;
+  --secondary: #ff9ed2;
+  --secondary-foreground: #3b0f33;
+  --accent: #ffe95c;
+  --accent-foreground: #3d2c05;
+  --success: #16a56f;
+  --danger: #ff3b5c;
+  --ring: #21c45d;
 }
 
-/* --- Été (variante saisonnière) ------------------------------------------- */
+/* --- Été "Sunset pop" (variante saisonnière) ------------------------------- */
 [data-theme="ete"] {
-  --background: #fef8f0;
-  --foreground: #33240f;
+  --background: #ffe0c2;
+  --foreground: #3d1c05;
   --surface: #ffffff;
-  --surface-foreground: #33240f;
-  --muted: #fdeede;
-  --muted-foreground: #97794f;
-  --border: #f7ddb8;
-  --primary: #ff8c42;
+  --surface-foreground: #3d1c05;
+  --muted: #fff0de;
+  --muted-foreground: #96682f;
+  --border: #ffc98f;
+  --primary: #ff6a00;
   --primary-foreground: #ffffff;
   --secondary: #ffd166;
-  --secondary-foreground: #33240f;
-  --accent: #06b6d4;
-  --accent-foreground: #ffffff;
-  --success: #3fb984;
-  --danger: #e5484d;
-  --ring: #ff8c42;
+  --secondary-foreground: #3d1c05;
+  --accent: #00cfe0;
+  --accent-foreground: #073236;
+  --success: #16a56f;
+  --danger: #ff3b5c;
+  --ring: #ff6a00;
 }

@@ -20,29 +20,29 @@ export default async function AdminDashboardPage() {
 
   return (
     <section className="space-y-6">
-      <h1 className="text-lg font-semibold">Tableau de bord</h1>
+      <h1 className="y2k-display text-2xl text-primary">Tableau de bord</h1>
 
       {/* Compteurs */}
       <div className="grid grid-cols-2 gap-3">
-        <div className="rounded-2xl border border-border bg-surface p-4">
-          <p className="text-2xl font-bold text-primary">{clientes.length}</p>
+        <div className="y2k-card p-4">
+          <p className="y2k-display text-3xl text-primary">{clientes.length}</p>
           <p className="text-sm text-muted-foreground">
             cliente{clientes.length > 1 ? "s" : ""}
           </p>
         </div>
         <Link
           href="/admin/clientes?seuil=1"
-          className="rounded-2xl border border-border bg-surface p-4 transition hover:bg-muted"
+          className="y2k-card p-4 transition hover:brightness-[1.02]"
         >
-          <p className="text-2xl font-bold text-success">{pretes.length}</p>
+          <p className="y2k-display text-3xl text-success">{pretes.length}</p>
           <p className="text-sm text-muted-foreground">ont atteint le seuil</p>
         </Link>
       </div>
 
       {/* Qui a atteint le seuil */}
-      <section className="rounded-2xl border border-border bg-surface p-4">
+      <section className="y2k-card p-4">
         <div className="flex items-baseline justify-between gap-2">
-          <h2 className="text-sm font-semibold">🎉 Récompenses prêtes</h2>
+          <h2 className="y2k-display text-base text-primary">🎉 Récompenses prêtes</h2>
           {pretes.length > 0 && (
             <Link
               href="/admin/clientes?seuil=1"
@@ -80,10 +80,10 @@ export default async function AdminDashboardPage() {
       {/* Réglages courants */}
       <Link
         href="/admin/reglages"
-        className="block rounded-2xl border border-border bg-surface p-4 transition hover:bg-muted"
+        className="y2k-card block p-4 transition hover:brightness-[1.02]"
       >
         <div className="flex items-center justify-between">
-          <h2 className="text-sm font-semibold">Réglages</h2>
+          <h2 className="y2k-display text-base text-primary">Réglages</h2>
           <span className="text-sm text-muted-foreground underline">
             Modifier
           </span>
@@ -99,13 +99,13 @@ export default async function AdminDashboardPage() {
       <div className="grid grid-cols-2 gap-3">
         <Link
           href="/admin/scan"
-          className="rounded-2xl bg-primary p-4 text-center font-semibold text-primary-foreground"
+          className="y2k-btn p-4 text-center text-lg"
         >
           Scanner
         </Link>
         <Link
           href="/admin/qr"
-          className="rounded-2xl border border-border bg-surface p-4 text-center font-semibold"
+          className="y2k-btn-outline p-4 text-center text-lg"
         >
           QR d&apos;inscription
         </Link>

@@ -12,15 +12,40 @@ export default async function InscriptionPage() {
   if (role === "cliente") redirect("/carte");
 
   return (
-    <main className="flex flex-1 items-center justify-center p-6">
-      <div className="w-full max-w-sm rounded-2xl border border-border bg-surface p-6 shadow-sm">
-        <h1 className="text-center text-xl font-semibold text-primary">
-          Bienvenue chez Regard2Baddies
-        </h1>
-        <p className="mb-6 mt-1 text-center text-sm text-muted-foreground">
-          Crée ta carte de fidélité en quelques secondes
-        </p>
-        <InscriptionForm />
+    <main className="relative flex flex-1 items-center justify-center overflow-hidden p-6">
+      <span aria-hidden className="sparkle left-[10%] top-[12%] text-2xl">
+        ✦
+      </span>
+      <span
+        aria-hidden
+        className="sparkle sparkle-accent right-[8%] top-[20%] text-lg [animation-delay:0.6s]"
+      >
+        ✦
+      </span>
+      <span
+        aria-hidden
+        className="sparkle sparkle-primary bottom-[12%] right-[14%] text-xl [animation-delay:1.1s]"
+      >
+        ✦
+      </span>
+
+      <div className="w-full max-w-sm space-y-6">
+        <header className="text-center">
+          <h1 className="y2k-wordmark text-4xl leading-tight">
+            Regard
+            <br />
+            2Baddies
+          </h1>
+          <p className="mt-4 inline-block">
+            <span className="y2k-chip text-sm font-medium">
+              ✦ Crée ta carte en quelques secondes ✦
+            </span>
+          </p>
+        </header>
+
+        <div className="y2k-card p-6">
+          <InscriptionForm />
+        </div>
       </div>
     </main>
   );

@@ -43,7 +43,7 @@ export default function ReglagesForm({
           step={1}
           required
           defaultValue={seuil}
-          className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
+          className="y2k-input text-base"
         />
       </div>
 
@@ -59,7 +59,7 @@ export default function ReglagesForm({
           step={1}
           required
           defaultValue={valeur}
-          className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
+          className="y2k-input text-base"
         />
       </div>
 
@@ -74,7 +74,7 @@ export default function ReglagesForm({
           id="theme_actif"
           name="theme_actif"
           defaultValue={theme}
-          className="w-full rounded-xl border border-border bg-surface px-4 py-3 text-base outline-none focus:ring-2 focus:ring-ring"
+          className="y2k-input text-base"
         >
           {THEMES.map((t) => (
             <option key={t.value} value={t.value}>
@@ -96,7 +96,7 @@ export default function ReglagesForm({
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-xl bg-primary px-4 py-3 font-semibold text-primary-foreground transition active:scale-[0.99] disabled:opacity-60"
+        className="y2k-btn w-full px-4 py-3 text-lg"
       >
         {pending ? "Enregistrement…" : "Enregistrer"}
       </button>

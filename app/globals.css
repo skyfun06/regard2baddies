@@ -8,31 +8,32 @@
    Les valeurs réelles (rose, violet, jaune, bleu, saisonnières…) sont définies
    dans themes.css et sélectionnées via l'attribut `data-theme` sur <html>.
 
-   `:root` ci-dessous = valeurs par défaut (palette "rose"), utilisées tant
+   `:root` ci-dessous = valeurs par défaut (palette "rose" Y2K), utilisées tant
    qu'aucun data-theme n'est appliqué (évite tout flash au chargement).
    =========================================================================== */
 :root {
-  --background: #fff5f7;
-  --foreground: #2b1a20;
+  --background: #ffd9ef;
+  --foreground: #3b0f33;
   --surface: #ffffff;
-  --surface-foreground: #2b1a20;
-  --muted: #f7e6ec;
-  --muted-foreground: #8a6b76;
-  --border: #f0d4dd;
-  --primary: #e84f8a;
+  --surface-foreground: #3b0f33;
+  --muted: #ffe6f4;
+  --muted-foreground: #91517b;
+  --border: #ffaede;
+  --primary: #ff2da2;
   --primary-foreground: #ffffff;
-  --secondary: #f9a8c8;
-  --secondary-foreground: #2b1a20;
-  --accent: #ffd166;
-  --accent-foreground: #2b1a20;
-  --success: #3fb984;
-  --danger: #e5484d;
-  --ring: #e84f8a;
+  --secondary: #c08bff;
+  --secondary-foreground: #3b0f33;
+  --accent: #62e0ff;
+  --accent-foreground: #123047;
+  --success: #16a56f;
+  --danger: #ff3b5c;
+  --ring: #ff2da2;
 }
 
 /* ---------------------------------------------------------------------------
    Pont vers Tailwind v4 : expose les variables comme utilitaires.
-   -> bg-primary, text-primary, border-border, bg-surface, ring-ring, etc.
+   -> bg-primary, text-primary, border-border, bg-surface, ring-ring,
+      font-display (Gagalin), etc.
    Comme on utilise `inline` + var(), changer --primary met à jour toutes les
    classes instantanément.
    --------------------------------------------------------------------------- */
@@ -56,6 +57,7 @@
 
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-gagalin);
 }
 
 /* Transition douce lors d'un changement de thème */
@@ -64,9 +66,336 @@
     border-color 0.3s ease;
 }
 
+/* ===========================================================================
+   FOND Y2K — halos holographiques + semis d'étoiles
+   ---------------------------------------------------------------------------
+   Les halos sont dérivés des variables du thème (color-mix), donc chaque
+   thème saisonnier garde sa propre ambiance sans CSS supplémentaire.
+   =========================================================================== */
 body {
-  background: var(--background);
+  background-color: var(--background);
+  background-image:
+    radial-gradient(
+      55% 45% at 12% 6%,
+      color-mix(in oklab, var(--secondary) 40%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      45% 38% at 90% 16%,
+      color-mix(in oklab, var(--accent) 34%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      70% 55% at 50% 104%,
+      color-mix(in oklab, var(--primary) 22%, transparent),
+      transparent 75%
+    );
+  background-attachment: fixed;
   color: var(--foreground);
   font-family: var(--font-sans), Arial, Helvetica, sans-serif;
   -webkit-tap-highlight-color: transparent; /* mobile : pas de flash au tap */
+}
+
+/* Semis d'étoiles ✦ discret par-dessus les halos (blanc, très transparent). */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M24 8l2.2 8.8L35 19l-8.8 2.2L24 30l-2.2-8.8L13 19l8.8-2.2z' fill='%23ffffff' fill-opacity='.5'/%3E%3Cpath d='M88 62l1.6 6.4 6.4 1.6-6.4 1.6L88 78l-1.6-6.4L80 70l6.4-1.6z' fill='%23ffffff' fill-opacity='.35'/%3E%3Ccircle cx='58' cy='34' r='1.6' fill='%23ffffff' fill-opacity='.45'/%3E%3Ccircle cx='30' cy='96' r='2' fill='%23ffffff' fill-opacity='.3'/%3E%3C/svg%3E");
+  background-size: 120px 120px;
+}
+
+/* ===========================================================================
+   COMPOSANTS Y2K — le look "sticker glossy"
+   =========================================================================== */
+
+/* --- Titre display (Gagalin) ---------------------------------------------- */
+.y2k-display {
+  font-family: var(--font-gagalin), var(--font-geist-sans), sans-serif;
+  letter-spacing: 0.03em;
+  font-weight: 400; /* Gagalin n'a qu'une graisse, déjà très bold */
+}
+
+/* --- Wordmark chrome (la signature) ---------------------------------------
+   Dégradé argent façon chrome + contour et ombre dure dans la couleur du
+   thème. À réserver aux grands corps (>= 2rem). */
+.y2k-wordmark {
+  font-family: var(--font-gagalin), var(--font-geist-sans), sans-serif;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: linear-gradient(
+    180deg,
+    #ffffff 6%,
+    #dfe3f5 34%,
+    #f8f9ff 48%,
+    #9aa2cc 54%,
+    #e9ecfb 76%,
+    #ffffff 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in oklab, var(--primary) 85%, black);
+  filter: drop-shadow(0 3px 0 var(--primary))
+    drop-shadow(0 8px 14px color-mix(in oklab, var(--primary) 45%, transparent));
+}
+
+/* --- Carte sticker ---------------------------------------------------------
+   Bordure blanche épaisse + liseré couleur + ombre dure décalée. */
+.y2k-card {
+  position: relative;
+  background: linear-gradient(
+    180deg,
+    var(--surface),
+    color-mix(in oklab, var(--surface) 94%, var(--primary))
+  );
+  border: 3px solid #ffffff;
+  border-radius: 1.5rem;
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--primary) 45%, transparent),
+    0 8px 0 -2px color-mix(in oklab, var(--primary) 35%, transparent),
+    0 18px 34px -14px color-mix(in oklab, var(--foreground) 35%, transparent);
+}
+
+/* --- Bouton gel "aqua" ------------------------------------------------------
+   Bombé, reflet gloss, ombre dure. Variantes via --btn / --btn-fg. */
+.y2k-btn {
+  --btn: var(--primary);
+  --btn-fg: var(--primary-foreground);
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-gagalin), var(--font-geist-sans), sans-serif;
+  letter-spacing: 0.05em;
+  border-radius: 9999px;
+  border: 2px solid #ffffff;
+  color: var(--btn-fg);
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--btn) 55%, white) 0%,
+    var(--btn) 48%,
+    color-mix(in oklab, var(--btn) 80%, black) 100%
+  );
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--btn) 60%, transparent),
+    0 5px 0 color-mix(in oklab, var(--btn) 60%, var(--foreground)),
+    inset 0 2px 3px rgba(255, 255, 255, 0.55);
+  text-shadow: 0 1px 0 color-mix(in oklab, var(--btn) 55%, black);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    opacity 0.15s ease;
+}
+/* Reflet gloss en haut du bouton */
+.y2k-btn::after {
+  content: "";
+  position: absolute;
+  left: 10%;
+  right: 10%;
+  top: 3px;
+  height: 42%;
+  border-radius: 9999px;
+  background: linear-gradient(
+    rgba(255, 255, 255, 0.85),
+    rgba(255, 255, 255, 0.05)
+  );
+  pointer-events: none;
+}
+.y2k-btn:active:not(:disabled) {
+  transform: translateY(3px);
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--btn) 60%, transparent),
+    0 2px 0 color-mix(in oklab, var(--btn) 60%, var(--foreground)),
+    inset 0 2px 3px rgba(255, 255, 255, 0.55);
+}
+.y2k-btn:disabled {
+  opacity: 0.6;
+}
+.y2k-btn:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--btn) 50%, white);
+  outline-offset: 2px;
+}
+
+/* Variantes de couleur */
+.y2k-btn-success {
+  --btn: var(--success);
+  --btn-fg: #ffffff;
+}
+.y2k-btn-danger {
+  --btn: var(--danger);
+  --btn-fg: #ffffff;
+}
+
+/* --- Bouton contour (secondaire) ------------------------------------------ */
+.y2k-btn-outline {
+  --btn: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-gagalin), var(--font-geist-sans), sans-serif;
+  letter-spacing: 0.05em;
+  border-radius: 9999px;
+  border: 2px solid var(--btn);
+  color: var(--btn);
+  background: var(--surface);
+  box-shadow: 0 4px 0 color-mix(in oklab, var(--btn) 35%, transparent);
+  transition:
+    transform 0.1s ease,
+    box-shadow 0.1s ease,
+    opacity 0.15s ease;
+}
+.y2k-btn-outline:active:not(:disabled) {
+  transform: translateY(2px);
+  box-shadow: 0 2px 0 color-mix(in oklab, var(--btn) 35%, transparent);
+}
+.y2k-btn-outline:disabled {
+  opacity: 0.6;
+}
+.y2k-btn-outline:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--btn) 50%, white);
+  outline-offset: 2px;
+}
+.y2k-btn-outline.y2k-btn-success {
+  --btn: var(--success);
+}
+.y2k-btn-outline.y2k-btn-danger {
+  --btn: var(--danger);
+}
+
+/* --- Champ de saisie -------------------------------------------------------- */
+.y2k-input {
+  width: 100%;
+  border-radius: 1rem;
+  border: 2px solid var(--border);
+  background: var(--surface);
+  padding: 0.75rem 1rem;
+  color: var(--surface-foreground);
+  box-shadow: inset 0 2px 4px
+    color-mix(in oklab, var(--primary) 10%, transparent);
+  outline: none;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.y2k-input:focus {
+  border-color: var(--primary);
+  box-shadow:
+    inset 0 2px 4px color-mix(in oklab, var(--primary) 10%, transparent),
+    0 0 0 3px color-mix(in oklab, var(--primary) 30%, transparent);
+}
+.y2k-input::placeholder {
+  color: color-mix(in oklab, var(--muted-foreground) 70%, transparent);
+}
+
+/* --- Puce / pastille -------------------------------------------------------- */
+.y2k-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 9999px;
+  border: 2px solid #ffffff;
+  background: var(--surface);
+  padding: 0.2rem 0.75rem;
+  box-shadow:
+    0 0 0 1.5px color-mix(in oklab, var(--primary) 40%, transparent),
+    0 3px 0 -1px color-mix(in oklab, var(--primary) 25%, transparent);
+}
+
+/* --- Cases de fidélité (étoiles) ------------------------------------------- */
+.y2k-slot {
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  border-radius: 9999px;
+  border: 2px dashed color-mix(in oklab, var(--primary) 40%, transparent);
+  background: color-mix(in oklab, var(--muted) 70%, white);
+  color: color-mix(in oklab, var(--muted-foreground) 55%, transparent);
+  font-size: 1.15rem;
+}
+.y2k-slot-on {
+  border: 2px solid #ffffff;
+  border-style: solid;
+  background: linear-gradient(
+    180deg,
+    color-mix(in oklab, var(--primary) 55%, white) 0%,
+    var(--primary) 55%,
+    color-mix(in oklab, var(--primary) 80%, black) 100%
+  );
+  color: #ffffff;
+  text-shadow: 0 1px 0 color-mix(in oklab, var(--primary) 55%, black);
+  box-shadow:
+    0 0 0 2px color-mix(in oklab, var(--primary) 55%, transparent),
+    0 3px 0 color-mix(in oklab, var(--primary) 60%, var(--foreground)),
+    inset 0 2px 2px rgba(255, 255, 255, 0.6);
+  animation: y2k-pop 0.35s ease-out;
+}
+
+/* --- Étoiles décoratives ---------------------------------------------------- */
+.sparkle {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  color: var(--secondary);
+  animation: y2k-twinkle 2.4s ease-in-out infinite;
+}
+.sparkle-accent {
+  color: var(--accent);
+}
+.sparkle-primary {
+  color: var(--primary);
+}
+
+@keyframes y2k-twinkle {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(0.8) rotate(0deg);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15) rotate(18deg);
+  }
+}
+@keyframes y2k-pop {
+  from {
+    transform: scale(0.4);
+  }
+  60% {
+    transform: scale(1.15);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Accessibilité : on coupe les animations si demandé. */
+@media (prefers-reduced-motion: reduce) {
+  .sparkle,
+  .y2k-slot-on {
+    animation: none;
+  }
+  .y2k-btn,
+  .y2k-btn-outline {
+    transition: none;
+  }
+}
+
+/* Impression (page QR) : fond neutre, pas de décor. */
+@media print {
+  body {
+    background: #ffffff;
+  }
+  body::before {
+    display: none;
+  }
+  .y2k-card {
+    border-color: transparent;
+    box-shadow: none;
+    background: #ffffff;
+  }
 }

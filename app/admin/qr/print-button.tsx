@@ -5,7 +5,7 @@ export default function PrintButton() {
   return (
     <button
       onClick={() => window.print()}
-      className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground"
+      className="y2k-btn px-4 py-2 text-sm"
     >
       Imprimer
     </button>

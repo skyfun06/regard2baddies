@@ -132,7 +132,7 @@ export default function Scanner() {
     return (
       <div className="space-y-6">
         <div>
-          <h1 className="text-lg font-semibold">Scanner</h1>
+          <h1 className="y2k-display text-2xl text-primary">Scanner</h1>
           <p className="mt-1 text-sm text-muted-foreground">
             Vise le QR code de la carte de la cliente.
           </p>
@@ -140,7 +140,7 @@ export default function Scanner() {
 
         <div
           id={READER_ID}
-          className="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border border-border bg-black/5"
+          className="mx-auto w-full max-w-xs overflow-hidden rounded-3xl border-[3px] border-white bg-black/5 shadow-[0_0_0_2px_var(--primary),0_8px_0_-2px_rgba(0,0,0,0.15)]"
         />
 
         {cameraError && (
@@ -157,7 +157,7 @@ export default function Scanner() {
         {/* Saisie manuelle en secours si le scan échoue */}
         <form
           onSubmit={chercherManuel}
-          className="space-y-2 rounded-2xl border border-border bg-surface p-4"
+          className="y2k-card space-y-2 p-4"
         >
           <label htmlFor="manual" className="text-sm font-medium">
             Le scan ne marche pas ? Saisis le code
@@ -168,12 +168,12 @@ export default function Scanner() {
               value={manual}
               onChange={(e) => setManual(e.target.value)}
               placeholder="Code de la carte"
-              className="min-w-0 flex-1 rounded-xl border border-border bg-background px-3 py-2 font-mono text-sm outline-none focus:ring-2 focus:ring-ring"
+              className="y2k-input min-w-0 flex-1 px-3 py-2 font-mono text-sm"
             />
             <button
               type="submit"
               disabled={pending}
-              className="rounded-xl bg-primary px-4 py-2 font-semibold text-primary-foreground disabled:opacity-60"
+              className="y2k-btn px-4 py-2"
             >
               OK
             </button>
@@ -189,7 +189,7 @@ export default function Scanner() {
       <header className="flex items-center justify-between">
         <div>
           <p className="text-sm text-muted-foreground">Cliente</p>
-          <h1 className="text-2xl font-bold text-primary">{info.prenom}</h1>
+          <h1 className="y2k-display text-3xl text-primary">{info.prenom}</h1>
         </div>
         <button
           onClick={nouvelleCliente}
@@ -200,21 +200,16 @@ export default function Scanner() {
       </header>
 
       {/* Compteur de cases */}
-      <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+      <section className="y2k-card p-6">
         <div className="grid grid-cols-5 gap-3">
           {Array.from({ length: info.seuil }).map((_, i) => {
             const active = i < info.remplies;
             return (
               <div
                 key={i}
-                className={
-                  "flex aspect-square items-center justify-center rounded-full border text-lg font-semibold " +
-                  (active
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-muted text-muted-foreground")
-                }
+                className={"y2k-slot" + (active ? " y2k-slot-on" : "")}
               >
-                {active ? "★" : ""}
+                {active ? "✦" : ""}
               </div>
             );
           })}
@@ -252,7 +247,7 @@ export default function Scanner() {
         <button
           onClick={validerPassage}
           disabled={pending}
-          className="w-full rounded-xl bg-primary px-4 py-3 font-semibold text-primary-foreground transition active:scale-[0.99] disabled:opacity-60"
+          className="y2k-btn w-full px-4 py-3 text-lg"
         >
           {pending ? "…" : "＋ Valider un passage"}
         </button>
@@ -261,7 +256,7 @@ export default function Scanner() {
           <button
             onClick={utiliserRecompense}
             disabled={pending}
-            className="w-full rounded-xl border border-success px-4 py-3 font-semibold text-success transition active:scale-[0.99] disabled:opacity-60"
+            className="y2k-btn-outline y2k-btn-success w-full px-4 py-3"
           >
             {pending ? "…" : "✓ Marquer la récompense utilisée"}
           </button>
@@ -269,8 +264,8 @@ export default function Scanner() {
       </div>
 
       {/* Historique des passages */}
-      <section className="rounded-2xl border border-border bg-surface p-4">
-        <h2 className="text-sm font-semibold">Derniers passages</h2>
+      <section className="y2k-card p-4">
+        <h2 className="y2k-display text-base text-primary">Derniers passages</h2>
         {info.historique.length === 0 ? (
           <p className="mt-2 text-sm text-muted-foreground">
             Aucun passage pour l&apos;instant.

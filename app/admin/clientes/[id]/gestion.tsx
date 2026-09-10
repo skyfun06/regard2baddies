@@ -52,7 +52,7 @@ export default function GestionCliente({
       {/* En-tête */}
       <header>
         <p className="text-sm text-muted-foreground">Cliente</p>
-        <h1 className="text-2xl font-bold text-primary">{info.prenom}</h1>
+        <h1 className="y2k-display text-3xl text-primary">{info.prenom}</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           {telephone ? telephone : "Pas de téléphone"}
           {" · "}
@@ -61,21 +61,16 @@ export default function GestionCliente({
       </header>
 
       {/* Cases du cycle courant */}
-      <section className="rounded-2xl border border-border bg-surface p-6 shadow-sm">
+      <section className="y2k-card p-6">
         <div className="grid grid-cols-5 gap-3">
           {Array.from({ length: info.seuil }).map((_, i) => {
             const active = i < info.remplies;
             return (
               <div
                 key={i}
-                className={
-                  "flex aspect-square items-center justify-center rounded-full border text-lg font-semibold " +
-                  (active
-                    ? "border-primary bg-primary text-primary-foreground"
-                    : "border-border bg-muted text-muted-foreground")
-                }
+                className={"y2k-slot" + (active ? " y2k-slot-on" : "")}
               >
-                {active ? "★" : ""}
+                {active ? "✦" : ""}
               </div>
             );
           })}
@@ -113,19 +108,19 @@ export default function GestionCliente({
 
       {/* Corriger les points */}
       <section className="space-y-3">
-        <h2 className="text-sm font-semibold">Corriger les points</h2>
+        <h2 className="y2k-display text-base text-primary">Corriger les points</h2>
         <div className="grid grid-cols-2 gap-3">
           <button
             onClick={() => lancer(() => ajouterPassage(clienteId))}
             disabled={pending}
-            className="rounded-xl bg-primary px-4 py-3 font-semibold text-primary-foreground transition active:scale-[0.99] disabled:opacity-60"
+            className="y2k-btn px-4 py-3"
           >
             ＋ Ajouter
           </button>
           <button
             onClick={() => lancer(() => retirerDernierPassage(clienteId))}
             disabled={pending || info.totalPassages === 0}
-            className="rounded-xl border border-border px-4 py-3 font-semibold transition active:scale-[0.99] disabled:opacity-60"
+            className="y2k-btn-outline px-4 py-3"
           >
             − Retirer
           </button>
@@ -134,7 +129,7 @@ export default function GestionCliente({
           <button
             onClick={() => lancer(() => marquerRecompenseUtilisee(clienteId))}
             disabled={pending}
-            className="w-full rounded-xl border border-success px-4 py-3 font-semibold text-success transition active:scale-[0.99] disabled:opacity-60"
+            className="y2k-btn-outline y2k-btn-success w-full px-4 py-3"
           >
             ✓ Marquer la récompense utilisée
           </button>
@@ -172,8 +167,8 @@ function ResetMotDePasse({
 
   if (!hasCompte) {
     return (
-      <section className="rounded-2xl border border-border bg-surface p-4">
-        <h2 className="text-sm font-semibold">Mot de passe</h2>
+      <section className="y2k-card p-4">
+        <h2 className="y2k-display text-base text-primary">Mot de passe</h2>
         <p className="mt-1 text-sm text-muted-foreground">
           Cette cliente n&apos;a pas de compte en ligne.
         </p>
@@ -191,8 +186,8 @@ function ResetMotDePasse({
   }
 
   return (
-    <section className="space-y-2 rounded-2xl border border-border bg-surface p-4">
-      <h2 className="text-sm font-semibold">Réinitialiser le mot de passe</h2>
+    <section className="y2k-card space-y-2 p-4">
+      <h2 className="y2k-display text-base text-primary">Réinitialiser le mot de passe</h2>
       <form onSubmit={soumettre} className="flex gap-2">
         <input
           type="text"
@@ -200,12 +195,12 @@ function ResetMotDePasse({
           onChange={(e) => setPwd(e.target.value)}
           placeholder="Nouveau mot de passe (8+)"
           autoComplete="off"
-          className="min-w-0 flex-1 rounded-xl border border-border bg-background px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-ring"
+          className="y2k-input min-w-0 flex-1 px-3 py-2 text-sm"
         />
         <button
           type="submit"
           disabled={disabled || pending || pwd.trim().length < 8}
-          className="rounded-xl bg-primary px-4 py-2 text-sm font-semibold text-primary-foreground disabled:opacity-60"
+          className="y2k-btn px-4 py-2 text-sm"
         >
           {pending ? "…" : "Changer"}
         </button>
@@ -238,8 +233,8 @@ function SupprimerCliente({
   const [pending, startTransition] = useTransition();
 
   return (
-    <section className="space-y-2 rounded-2xl border border-danger/40 bg-danger/5 p-4">
-      <h2 className="text-sm font-semibold text-danger">Supprimer la cliente</h2>
+    <section className="space-y-2 rounded-3xl border-2 border-danger/50 bg-danger/5 p-4">
+      <h2 className="y2k-display text-base text-danger">Supprimer la cliente</h2>
       <p className="text-sm text-muted-foreground">
         Supprime définitivement {prenom}, sa carte, ses passages et son compte.
         Irréversible.
@@ -253,14 +248,14 @@ function SupprimerCliente({
               })
             }
             disabled={pending}
-            className="rounded-xl bg-danger px-4 py-2 text-sm font-semibold text-white disabled:opacity-60"
+            className="y2k-btn y2k-btn-danger px-4 py-2 text-sm"
           >
             {pending ? "Suppression…" : "Oui, supprimer définitivement"}
           </button>
           <button
             onClick={() => setConfirme(false)}
             disabled={pending}
-            className="rounded-xl border border-border px-4 py-2 text-sm"
+            className="y2k-btn-outline px-4 py-2 text-sm"
           >
             Annuler
           </button>
@@ -268,7 +263,7 @@ function SupprimerCliente({
       ) : (
         <button
           onClick={() => setConfirme(true)}
-          className="rounded-xl border border-danger px-4 py-2 text-sm font-semibold text-danger"
+          className="y2k-btn-outline y2k-btn-danger px-4 py-2 text-sm"
         >
           Supprimer…
         </button>

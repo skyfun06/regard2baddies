@@ -19,7 +19,7 @@ export default async function ReglagesPage() {
   return (
     <section className="space-y-5">
       <div>
-        <h1 className="text-lg font-semibold">Réglages</h1>
+        <h1 className="y2k-display text-2xl text-primary">Réglages</h1>
         <p className="mt-1 text-sm text-muted-foreground">
           Ces valeurs s&apos;appliquent à toutes les cartes.
         </p>
