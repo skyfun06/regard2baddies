@@ -16,7 +16,7 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-10 border-b-2 border-white bg-surface/85 backdrop-blur print:hidden">
+      <header className="sticky top-0 z-10 border-b border-white/15 bg-surface/85 backdrop-blur print:hidden">
         <nav className="mx-auto flex max-w-2xl flex-wrap items-center gap-x-3 gap-y-2 p-4 text-sm">
           <Link href="/admin" className="y2k-display text-lg text-primary">
             Admin ✦

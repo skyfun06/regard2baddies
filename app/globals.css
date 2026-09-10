@@ -8,26 +8,29 @@
    Les valeurs réelles (rose, violet, jaune, bleu, saisonnières…) sont définies
    dans themes.css et sélectionnées via l'attribut `data-theme` sur <html>.
 
-   `:root` ci-dessous = valeurs par défaut (palette "rose" Y2K), utilisées tant
-   qu'aucun data-theme n'est appliqué (évite tout flash au chargement).
+   `:root` ci-dessous = valeurs par défaut (palette "rose" / Baddie noir),
+   utilisées tant qu'aucun data-theme n'est appliqué (évite tout flash).
+
+   Design v2 « Chrome Baddie » : fond noir-prune, chrome métallique, fuchsia
+   néon. Le look est porté par les classes .y2k-* plus bas.
    =========================================================================== */
 :root {
-  --background: #ffd9ef;
-  --foreground: #3b0f33;
-  --surface: #ffffff;
-  --surface-foreground: #3b0f33;
-  --muted: #ffe6f4;
-  --muted-foreground: #91517b;
-  --border: #ffaede;
-  --primary: #ff2da2;
+  --background: #16060f;
+  --foreground: #ffeaf5;
+  --surface: #251019;
+  --surface-foreground: #ffeaf5;
+  --muted: #341826;
+  --muted-foreground: #cf94b4;
+  --border: #4d2038;
+  --primary: #ff2d8d;
   --primary-foreground: #ffffff;
-  --secondary: #c08bff;
-  --secondary-foreground: #3b0f33;
-  --accent: #62e0ff;
-  --accent-foreground: #123047;
-  --success: #16a56f;
-  --danger: #ff3b5c;
-  --ring: #ff2da2;
+  --secondary: #c9ced9;
+  --secondary-foreground: #16060f;
+  --accent: #f5c542;
+  --accent-foreground: #16060f;
+  --success: #2ddc9b;
+  --danger: #ff4d6d;
+  --ring: #ff2d8d;
 }
 
 /* ---------------------------------------------------------------------------
@@ -60,34 +63,43 @@
   --font-display: var(--font-gagalin);
 }
 
-/* Transition douce lors d'un changement de thème */
+/* Dégradé chrome partagé (bordures métal, wordmark) */
 :root {
+  --chrome: linear-gradient(
+    160deg,
+    #f8f9ff 0%,
+    #8d93ad 24%,
+    #eef0fa 42%,
+    #626880 58%,
+    #ffffff 78%,
+    #9aa0bb 100%
+  );
   --theme-transition: background-color 0.3s ease, color 0.3s ease,
     border-color 0.3s ease;
 }
 
 /* ===========================================================================
-   FOND Y2K — halos holographiques + semis d'étoiles
+   FOND — noir profond + lueurs néon + poussière d'étoiles chrome
    ---------------------------------------------------------------------------
-   Les halos sont dérivés des variables du thème (color-mix), donc chaque
+   Les lueurs sont dérivées des variables du thème (color-mix), donc chaque
    thème saisonnier garde sa propre ambiance sans CSS supplémentaire.
    =========================================================================== */
 body {
   background-color: var(--background);
   background-image:
     radial-gradient(
-      55% 45% at 12% 6%,
-      color-mix(in oklab, var(--secondary) 40%, transparent),
-      transparent 70%
-    ),
-    radial-gradient(
-      45% 38% at 90% 16%,
-      color-mix(in oklab, var(--accent) 34%, transparent),
-      transparent 70%
-    ),
-    radial-gradient(
-      70% 55% at 50% 104%,
+      50% 40% at 15% 0%,
       color-mix(in oklab, var(--primary) 22%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      40% 32% at 92% 12%,
+      color-mix(in oklab, var(--secondary) 14%, transparent),
+      transparent 70%
+    ),
+    radial-gradient(
+      70% 50% at 50% 108%,
+      color-mix(in oklab, var(--primary) 16%, transparent),
       transparent 75%
     );
   background-attachment: fixed;
@@ -96,19 +108,19 @@ body {
   -webkit-tap-highlight-color: transparent; /* mobile : pas de flash au tap */
 }
 
-/* Semis d'étoiles ✦ discret par-dessus les halos (blanc, très transparent). */
+/* Poussière d'étoiles ✦ discrète (argent, très transparente). */
 body::before {
   content: "";
   position: fixed;
   inset: 0;
   z-index: -1;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120' viewBox='0 0 120 120'%3E%3Cpath d='M24 8l2.2 8.8L35 19l-8.8 2.2L24 30l-2.2-8.8L13 19l8.8-2.2z' fill='%23ffffff' fill-opacity='.5'/%3E%3Cpath d='M88 62l1.6 6.4 6.4 1.6-6.4 1.6L88 78l-1.6-6.4L80 70l6.4-1.6z' fill='%23ffffff' fill-opacity='.35'/%3E%3Ccircle cx='58' cy='34' r='1.6' fill='%23ffffff' fill-opacity='.45'/%3E%3Ccircle cx='30' cy='96' r='2' fill='%23ffffff' fill-opacity='.3'/%3E%3C/svg%3E");
-  background-size: 120px 120px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140' viewBox='0 0 140 140'%3E%3Cpath d='M28 10l2.4 9.6L40 22l-9.6 2.4L28 34l-2.4-9.6L16 22l9.6-2.4z' fill='%23dfe3f0' fill-opacity='.28'/%3E%3Cpath d='M104 74l1.7 6.8 6.8 1.7-6.8 1.7-1.7 6.8-1.7-6.8-6.8-1.7 6.8-1.7z' fill='%23dfe3f0' fill-opacity='.2'/%3E%3Ccircle cx='68' cy='40' r='1.5' fill='%23ffffff' fill-opacity='.25'/%3E%3Ccircle cx='36' cy='112' r='1.8' fill='%23ffffff' fill-opacity='.18'/%3E%3C/svg%3E");
+  background-size: 140px 140px;
 }
 
 /* ===========================================================================
-   COMPOSANTS Y2K — le look "sticker glossy"
+   COMPOSANTS Y2K v2 — dark glam, chrome & néon
    =========================================================================== */
 
 /* --- Titre display (Gagalin) ---------------------------------------------- */
@@ -118,9 +130,14 @@ body::before {
   font-weight: 400; /* Gagalin n'a qu'une graisse, déjà très bold */
 }
 
+/* Halo néon pour texte accentué (prénom, gros chiffres) */
+.y2k-glow-text {
+  text-shadow: 0 0 18px color-mix(in oklab, var(--primary) 65%, transparent);
+}
+
 /* --- Wordmark chrome (la signature) ---------------------------------------
-   Dégradé argent façon chrome + contour et ombre dure dans la couleur du
-   thème. À réserver aux grands corps (>= 2rem). */
+   Dégradé argent façon chrome + halo néon de la couleur du thème.
+   À réserver aux grands corps (>= 2rem). */
 .y2k-wordmark {
   font-family: var(--font-gagalin), var(--font-geist-sans), sans-serif;
   letter-spacing: 0.04em;
@@ -130,37 +147,38 @@ body::before {
     #ffffff 6%,
     #dfe3f5 34%,
     #f8f9ff 48%,
-    #9aa2cc 54%,
+    #878ead 54%,
     #e9ecfb 76%,
     #ffffff 100%
   );
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
-  -webkit-text-stroke: 1px color-mix(in oklab, var(--primary) 85%, black);
-  filter: drop-shadow(0 3px 0 var(--primary))
-    drop-shadow(0 8px 14px color-mix(in oklab, var(--primary) 45%, transparent));
+  filter: drop-shadow(0 2px 0 rgba(0, 0, 0, 0.65))
+    drop-shadow(0 0 22px color-mix(in oklab, var(--primary) 60%, transparent));
 }
 
-/* --- Carte sticker ---------------------------------------------------------
-   Bordure blanche épaisse + liseré couleur + ombre dure décalée. */
+/* --- Carte "plaque" --------------------------------------------------------
+   Surface sombre satinée + cadre chrome dégradé + halo néon. */
 .y2k-card {
   position: relative;
-  background: linear-gradient(
-    180deg,
-    var(--surface),
-    color-mix(in oklab, var(--surface) 94%, var(--primary))
-  );
-  border: 3px solid #ffffff;
-  border-radius: 1.5rem;
+  border: 2px solid transparent;
+  border-radius: 1.25rem;
+  background:
+    linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--surface) 86%, white) 0%,
+        var(--surface) 34%
+      )
+      padding-box,
+    var(--chrome) border-box;
   box-shadow:
-    0 0 0 2px color-mix(in oklab, var(--primary) 45%, transparent),
-    0 8px 0 -2px color-mix(in oklab, var(--primary) 35%, transparent),
-    0 18px 34px -14px color-mix(in oklab, var(--foreground) 35%, transparent);
+    0 14px 34px -14px rgba(0, 0, 0, 0.85),
+    0 0 26px -8px color-mix(in oklab, var(--primary) 45%, transparent);
 }
 
-/* --- Bouton gel "aqua" ------------------------------------------------------
-   Bombé, reflet gloss, ombre dure. Variantes via --btn / --btn-fg. */
+/* --- Bouton gel néon --------------------------------------------------------
+   Bombé, reflet gloss, cadre chrome, halo néon. Variantes via --btn. */
 .y2k-btn {
   --btn: var(--primary);
   --btn-fg: var(--primary-foreground);
@@ -172,19 +190,22 @@ body::before {
   font-family: var(--font-gagalin), var(--font-geist-sans), sans-serif;
   letter-spacing: 0.05em;
   border-radius: 9999px;
-  border: 2px solid #ffffff;
+  border: 2px solid transparent;
   color: var(--btn-fg);
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--btn) 55%, white) 0%,
-    var(--btn) 48%,
-    color-mix(in oklab, var(--btn) 80%, black) 100%
-  );
+  background:
+    linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--btn) 60%, white) 0%,
+        var(--btn) 48%,
+        color-mix(in oklab, var(--btn) 62%, black) 100%
+      )
+      padding-box,
+    var(--chrome) border-box;
   box-shadow:
-    0 0 0 2px color-mix(in oklab, var(--btn) 60%, transparent),
-    0 5px 0 color-mix(in oklab, var(--btn) 60%, var(--foreground)),
-    inset 0 2px 3px rgba(255, 255, 255, 0.55);
-  text-shadow: 0 1px 0 color-mix(in oklab, var(--btn) 55%, black);
+    0 5px 0 color-mix(in oklab, var(--btn) 30%, black),
+    0 0 22px -4px color-mix(in oklab, var(--btn) 65%, transparent),
+    inset 0 2px 3px rgba(255, 255, 255, 0.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.45);
   transition:
     transform 0.1s ease,
     box-shadow 0.1s ease,
@@ -200,37 +221,37 @@ body::before {
   height: 42%;
   border-radius: 9999px;
   background: linear-gradient(
-    rgba(255, 255, 255, 0.85),
-    rgba(255, 255, 255, 0.05)
+    rgba(255, 255, 255, 0.7),
+    rgba(255, 255, 255, 0.04)
   );
   pointer-events: none;
 }
 .y2k-btn:active:not(:disabled) {
   transform: translateY(3px);
   box-shadow:
-    0 0 0 2px color-mix(in oklab, var(--btn) 60%, transparent),
-    0 2px 0 color-mix(in oklab, var(--btn) 60%, var(--foreground)),
-    inset 0 2px 3px rgba(255, 255, 255, 0.55);
+    0 2px 0 color-mix(in oklab, var(--btn) 30%, black),
+    0 0 16px -4px color-mix(in oklab, var(--btn) 65%, transparent),
+    inset 0 2px 3px rgba(255, 255, 255, 0.5);
 }
 .y2k-btn:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
 }
 .y2k-btn:focus-visible {
-  outline: 3px solid color-mix(in oklab, var(--btn) 50%, white);
+  outline: 3px solid color-mix(in oklab, var(--btn) 60%, white);
   outline-offset: 2px;
 }
 
 /* Variantes de couleur */
 .y2k-btn-success {
   --btn: var(--success);
-  --btn-fg: #ffffff;
+  --btn-fg: #06130d;
 }
 .y2k-btn-danger {
   --btn: var(--danger);
   --btn-fg: #ffffff;
 }
 
-/* --- Bouton contour (secondaire) ------------------------------------------ */
+/* --- Bouton contour (secondaire) ------------------------------------------- */
 .y2k-btn-outline {
   --btn: var(--primary);
   display: inline-flex;
@@ -241,9 +262,11 @@ body::before {
   letter-spacing: 0.05em;
   border-radius: 9999px;
   border: 2px solid var(--btn);
-  color: var(--btn);
-  background: var(--surface);
-  box-shadow: 0 4px 0 color-mix(in oklab, var(--btn) 35%, transparent);
+  color: color-mix(in oklab, var(--btn) 80%, white);
+  background: color-mix(in oklab, var(--surface) 82%, black);
+  box-shadow:
+    0 4px 0 rgba(0, 0, 0, 0.55),
+    0 0 16px -6px color-mix(in oklab, var(--btn) 55%, transparent);
   transition:
     transform 0.1s ease,
     box-shadow 0.1s ease,
@@ -251,13 +274,15 @@ body::before {
 }
 .y2k-btn-outline:active:not(:disabled) {
   transform: translateY(2px);
-  box-shadow: 0 2px 0 color-mix(in oklab, var(--btn) 35%, transparent);
+  box-shadow:
+    0 2px 0 rgba(0, 0, 0, 0.55),
+    0 0 12px -6px color-mix(in oklab, var(--btn) 55%, transparent);
 }
 .y2k-btn-outline:disabled {
-  opacity: 0.6;
+  opacity: 0.55;
 }
 .y2k-btn-outline:focus-visible {
-  outline: 3px solid color-mix(in oklab, var(--btn) 50%, white);
+  outline: 3px solid color-mix(in oklab, var(--btn) 60%, white);
   outline-offset: 2px;
 }
 .y2k-btn-outline.y2k-btn-success {
@@ -272,11 +297,10 @@ body::before {
   width: 100%;
   border-radius: 1rem;
   border: 2px solid var(--border);
-  background: var(--surface);
+  background: color-mix(in oklab, var(--surface) 72%, black);
   padding: 0.75rem 1rem;
   color: var(--surface-foreground);
-  box-shadow: inset 0 2px 4px
-    color-mix(in oklab, var(--primary) 10%, transparent);
+  box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.45);
   outline: none;
   transition:
     border-color 0.15s ease,
@@ -285,11 +309,11 @@ body::before {
 .y2k-input:focus {
   border-color: var(--primary);
   box-shadow:
-    inset 0 2px 4px color-mix(in oklab, var(--primary) 10%, transparent),
-    0 0 0 3px color-mix(in oklab, var(--primary) 30%, transparent);
+    inset 0 2px 6px rgba(0, 0, 0, 0.45),
+    0 0 0 3px color-mix(in oklab, var(--primary) 35%, transparent);
 }
 .y2k-input::placeholder {
-  color: color-mix(in oklab, var(--muted-foreground) 70%, transparent);
+  color: color-mix(in oklab, var(--muted-foreground) 60%, transparent);
 }
 
 /* --- Puce / pastille -------------------------------------------------------- */
@@ -298,12 +322,12 @@ body::before {
   align-items: center;
   gap: 0.35rem;
   border-radius: 9999px;
-  border: 2px solid #ffffff;
-  background: var(--surface);
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--surface), var(--surface)) padding-box,
+    var(--chrome) border-box;
   padding: 0.2rem 0.75rem;
-  box-shadow:
-    0 0 0 1.5px color-mix(in oklab, var(--primary) 40%, transparent),
-    0 3px 0 -1px color-mix(in oklab, var(--primary) 25%, transparent);
+  box-shadow: 0 3px 10px -4px rgba(0, 0, 0, 0.7);
 }
 
 /* --- Cases de fidélité (étoiles) ------------------------------------------- */
@@ -312,26 +336,29 @@ body::before {
   display: grid;
   place-items: center;
   border-radius: 9999px;
-  border: 2px dashed color-mix(in oklab, var(--primary) 40%, transparent);
-  background: color-mix(in oklab, var(--muted) 70%, white);
-  color: color-mix(in oklab, var(--muted-foreground) 55%, transparent);
+  border: 2px dashed color-mix(in oklab, var(--primary) 38%, transparent);
+  background: color-mix(in oklab, var(--surface) 55%, black);
+  color: color-mix(in oklab, var(--muted-foreground) 45%, transparent);
   font-size: 1.15rem;
 }
 .y2k-slot-on {
-  border: 2px solid #ffffff;
+  border: 2px solid transparent;
   border-style: solid;
-  background: linear-gradient(
-    180deg,
-    color-mix(in oklab, var(--primary) 55%, white) 0%,
-    var(--primary) 55%,
-    color-mix(in oklab, var(--primary) 80%, black) 100%
-  );
+  background:
+    linear-gradient(
+        180deg,
+        color-mix(in oklab, var(--primary) 60%, white) 0%,
+        var(--primary) 55%,
+        color-mix(in oklab, var(--primary) 60%, black) 100%
+      )
+      padding-box,
+    var(--chrome) border-box;
   color: #ffffff;
-  text-shadow: 0 1px 0 color-mix(in oklab, var(--primary) 55%, black);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
   box-shadow:
-    0 0 0 2px color-mix(in oklab, var(--primary) 55%, transparent),
-    0 3px 0 color-mix(in oklab, var(--primary) 60%, var(--foreground)),
-    inset 0 2px 2px rgba(255, 255, 255, 0.6);
+    0 3px 0 color-mix(in oklab, var(--primary) 35%, black),
+    0 0 16px -2px color-mix(in oklab, var(--primary) 70%, transparent),
+    inset 0 2px 2px rgba(255, 255, 255, 0.55);
   animation: y2k-pop 0.35s ease-out;
 }
 
@@ -353,11 +380,11 @@ body::before {
 @keyframes y2k-twinkle {
   0%,
   100% {
-    opacity: 0.3;
+    opacity: 0.25;
     transform: scale(0.8) rotate(0deg);
   }
   50% {
-    opacity: 1;
+    opacity: 0.9;
     transform: scale(1.15) rotate(18deg);
   }
 }
@@ -385,8 +412,18 @@ body::before {
   }
 }
 
-/* Impression (page QR) : fond neutre, pas de décor. */
+/* Impression (page QR) : on force une palette claire, papier oblige. */
 @media print {
+  :root,
+  [data-theme] {
+    --background: #ffffff;
+    --foreground: #1a0a14;
+    --surface: #ffffff;
+    --surface-foreground: #1a0a14;
+    --muted: #f3f3f3;
+    --muted-foreground: #555555;
+    --border: #dddddd;
+  }
   body {
     background: #ffffff;
   }
@@ -395,7 +432,14 @@ body::before {
   }
   .y2k-card {
     border-color: transparent;
-    box-shadow: none;
     background: #ffffff;
+    box-shadow: none;
+  }
+  .y2k-wordmark {
+    background: none;
+    -webkit-background-clip: initial;
+    background-clip: initial;
+    color: #1a0a14;
+    filter: none;
   }
 }

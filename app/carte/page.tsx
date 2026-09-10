@@ -105,7 +105,7 @@ export default async function CartePage() {
             <span className="y2k-chip text-xs font-medium text-muted-foreground">
               ✦ Ta carte
             </span>
-            <h1 className="y2k-display mt-2 text-4xl text-primary [text-shadow:0_3px_0_rgba(255,255,255,.9)]">
+            <h1 className="y2k-display y2k-glow-text mt-2 text-4xl text-primary">
               {cliente.prenom}
             </h1>
           </div>
