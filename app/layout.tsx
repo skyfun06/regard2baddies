@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { createClient } from "@/lib/supabase/server";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -34,14 +35,24 @@ export const viewport: Viewport = {
 };
 
 /**
- * `data-theme` fixe la palette active (voir app/themes.css).
- * Valeur par défaut "rose" ; plus tard, on la lira depuis reglages.theme_actif.
+ * `data-theme` fixe la palette active (voir app/themes.css). La valeur vient de
+ * reglages.theme_actif via la fonction get_theme() (lisible par tous, thème
+ * saisonnier appliqué à TOUTE l'app). "rose" par défaut si indisponible.
  */
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  let theme = "rose";
+  try {
+    const supabase = await createClient();
+    const { data } = await supabase.rpc("get_theme");
+    if (typeof data === "string" && data) theme = data;
+  } catch {
+    // base indisponible : on garde le thème par défaut.
+  }
+
   return (
     <html
       lang="fr"
-      data-theme="rose"
+      data-theme={theme}
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>

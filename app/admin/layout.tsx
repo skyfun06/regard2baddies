@@ -16,8 +16,8 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-10 border-b border-border bg-surface/90 backdrop-blur">
-        <nav className="mx-auto flex max-w-2xl items-center gap-4 p-4 text-sm">
+      <header className="sticky top-0 z-10 border-b border-border bg-surface/90 backdrop-blur print:hidden">
+        <nav className="mx-auto flex max-w-2xl flex-wrap items-center gap-x-4 gap-y-2 p-4 text-sm">
           <Link href="/admin" className="font-semibold text-primary">
             Admin
           </Link>
@@ -26,6 +26,12 @@ export default async function AdminLayout({
           </Link>
           <Link href="/admin/clientes" className="text-muted-foreground">
             Clientes
+          </Link>
+          <Link href="/admin/reglages" className="text-muted-foreground">
+            Réglages
+          </Link>
+          <Link href="/admin/qr" className="text-muted-foreground">
+            QR
           </Link>
           <form action={logout} className="ml-auto">
             <button className="text-muted-foreground underline">

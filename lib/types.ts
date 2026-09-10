@@ -37,6 +37,19 @@ export type Reglages = {
   updated_at: string;
 };
 
+/** Aperçu d'une cliente pour la liste admin (avec compteurs dérivés). */
+export type ClienteApercu = {
+  id: string;
+  prenom: string;
+  telephone: string | null;
+  created_at: string;
+  hasCompte: boolean; // possède un compte (peut réinitialiser son mot de passe)
+  totalPassages: number;
+  remplies: number; // cases du cycle courant
+  seuil: number;
+  recompensesDisponibles: number; // >0 => a atteint le seuil
+};
+
 /** Ligne de la table `recompenses` (une récompense utilisée / remise). */
 export type Recompense = {
   id: string;

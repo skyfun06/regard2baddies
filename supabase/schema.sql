@@ -241,6 +241,65 @@ $$;
 grant execute on function public.get_carte_by_token(text) to anon, authenticated;
 
 -- ===========================================================================
+-- Thème actif — lisible par tous (y compris pages publiques), non sensible.
+-- ===========================================================================
+-- Permet d'appliquer le thème saisonnier sur TOUTE l'app (login, inscription,
+-- carte…) sans exposer les autres réglages via la RLS.
+create or replace function public.get_theme()
+returns text
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select theme_actif from public.reglages where id = true;
+$$;
+
+grant execute on function public.get_theme() to anon, authenticated;
+
+-- ===========================================================================
+-- Aperçu de toutes les clientes pour la gestion admin (Partie 3).
+-- ===========================================================================
+-- Agrège en une seule requête, pour CHAQUE cliente : ses compteurs de passages
+-- et de récompenses utilisées, et si elle possède un compte (pour proposer la
+-- réinitialisation du mot de passe). SECURITY DEFINER + garde `is_admin()` :
+-- une personne non-admin n'obtient AUCUNE ligne (0 fuite de données).
+-- Les valeurs dérivées (cases remplies, récompenses disponibles) sont calculées
+-- côté serveur Next à partir du seuil courant — voir lib/admin-queries.ts.
+create or replace function public.admin_clientes_apercu()
+returns table (
+  id                    uuid,
+  prenom                text,
+  telephone             text,
+  created_at            timestamptz,
+  has_compte            boolean,
+  total_passages        bigint,
+  recompenses_utilisees bigint
+)
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select
+    c.id,
+    c.prenom,
+    c.telephone,
+    c.created_at,
+    (c.user_id is not null)   as has_compte,
+    count(distinct p.id)      as total_passages,
+    count(distinct rc.id)     as recompenses_utilisees
+  from public.clientes c
+  left join public.passages    p  on p.cliente_id  = c.id
+  left join public.recompenses rc on rc.cliente_id = c.id
+  where public.is_admin()
+  group by c.id
+  order by c.prenom asc;
+$$;
+
+grant execute on function public.admin_clientes_apercu() to authenticated;
+
+-- ===========================================================================
 -- AMORÇAGE DE L'ADMIN (à exécuter une fois, après avoir créé le compte de Léa
 -- dans Authentication > Users). Remplace l'email par celui du compte admin :
 -- ===========================================================================
