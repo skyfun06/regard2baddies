@@ -47,7 +47,7 @@ export default async function ClientesPage({
       <div className="flex gap-2 text-sm">
         <FiltreLien label="Toutes" actif={!seulSeuil} q={q} seuil={false} />
         <FiltreLien
-          label="🎉 Récompense prête"
+          label="Récompense prête"
           actif={seulSeuil}
           q={q}
           seuil
@@ -124,9 +124,9 @@ function FiltreLien({
     <Link
       href={href}
       className={
-        "rounded-full border-2 px-3 py-1 transition " +
+        "rounded-full border px-3 py-1 transition " +
         (actif
-          ? "border-primary bg-primary/10 font-semibold text-primary shadow-[0_3px_0_rgba(0,0,0,0.08)]"
+          ? "border-primary bg-primary/10 font-semibold text-primary"
           : "border-border bg-surface text-muted-foreground hover:border-primary hover:text-primary")
       }
     >

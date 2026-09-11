@@ -81,31 +81,14 @@ export default async function CartePage() {
 
   return (
     <main className="relative flex flex-1 flex-col items-center overflow-hidden p-6">
-      {/* Étoiles décoratives */}
-      <span aria-hidden className="sparkle left-[6%] top-[8%] text-xl">
-        ✦
-      </span>
-      <span
-        aria-hidden
-        className="sparkle sparkle-accent right-[8%] top-[16%] text-sm [animation-delay:0.8s]"
-      >
-        ✦
-      </span>
-      <span
-        aria-hidden
-        className="sparkle sparkle-primary bottom-[14%] left-[10%] text-lg [animation-delay:1.4s]"
-      >
-        ✦
-      </span>
-
       <div className="w-full max-w-sm space-y-6">
         {/* En-tête */}
         <header className="flex items-end justify-between">
           <div>
             <span className="y2k-chip text-xs font-medium text-muted-foreground">
-              ✦ Ta carte
+              Ta carte
             </span>
-            <h1 className="y2k-display y2k-glow-text mt-2 text-4xl text-primary">
+            <h1 className="y2k-display mt-2 text-4xl text-primary">
               {cliente.prenom}
             </h1>
           </div>
@@ -136,7 +119,7 @@ export default async function CartePage() {
           <p className="mt-5 text-center text-sm">
             {recompensePrete ? (
               <span className="y2k-display text-base text-success">
-                🎉 Récompense débloquée : {valeur} € offerts !
+                Récompense débloquée : {valeur} € offerts !
               </span>
             ) : (
               <>
@@ -157,7 +140,7 @@ export default async function CartePage() {
           <p className="mt-1 text-xs text-muted-foreground">
             Montre-le à Léa à chaque passage.
           </p>
-          <div className="mx-auto mt-4 w-48 rounded-2xl border-2 border-border bg-white p-3 shadow-[0_4px_0_rgba(0,0,0,0.06)]">
+          <div className="mx-auto mt-4 w-48 rounded-xl border border-border bg-white p-3">
             <div
               className="[&>svg]:h-auto [&>svg]:w-full"
               // QR généré côté serveur : contenu SVG sûr (pas d'entrée utilisateur).

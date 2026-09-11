@@ -78,7 +78,7 @@ export default function GestionCliente({
         <p className="mt-5 text-center text-sm">
           {prete ? (
             <span className="font-semibold text-success">
-              🎉 Récompense disponible : {info.valeurRecompense} €
+              Récompense disponible : {info.valeurRecompense} €
               {info.recompensesDisponibles > 1
                 ? ` (×${info.recompensesDisponibles})`
                 : ""}
@@ -233,7 +233,7 @@ function SupprimerCliente({
   const [pending, startTransition] = useTransition();
 
   return (
-    <section className="space-y-2 rounded-3xl border-2 border-danger/50 bg-danger/5 p-4">
+    <section className="space-y-2 rounded-2xl border border-danger/50 bg-danger/5 p-4">
       <h2 className="y2k-display text-base text-danger">Supprimer la cliente</h2>
       <p className="text-sm text-muted-foreground">
         Supprime définitivement {prenom}, sa carte, ses passages et son compte.

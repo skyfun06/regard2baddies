@@ -140,7 +140,7 @@ export default function Scanner() {
 
         <div
           id={READER_ID}
-          className="mx-auto w-full max-w-xs overflow-hidden rounded-3xl border-[3px] border-white bg-black/5 shadow-[0_0_0_2px_var(--primary),0_8px_0_-2px_rgba(0,0,0,0.15)]"
+          className="mx-auto w-full max-w-xs overflow-hidden rounded-2xl border border-border bg-black/20"
         />
 
         {cameraError && (
@@ -218,7 +218,7 @@ export default function Scanner() {
         <p className="mt-5 text-center text-sm">
           {info.recompensesDisponibles >= 1 ? (
             <span className="font-semibold text-success">
-              🎉 Récompense disponible : {info.valeurRecompense} €
+              Récompense disponible : {info.valeurRecompense} €
               {info.recompensesDisponibles > 1
                 ? ` (×${info.recompensesDisponibles})`
                 : ""}

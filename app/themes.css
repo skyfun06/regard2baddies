@@ -1,5 +1,5 @@
 /* ===========================================================================
-   PALETTES DE THÈME — édition « Chrome Baddie » (v2)
+   PALETTES DE THÈME — édition « Dark glam » (v3)
    ---------------------------------------------------------------------------
    Chaque thème ne fait que redéfinir les variables sémantiques.
    Pour changer la palette de toute l'app : mettre l'attribut correspondant sur
@@ -11,9 +11,9 @@
    Thèmes de base        : rose · violet · jaune · bleu
    Variantes saisonnières : noel · halloween · printemps · ete
 
-   Tous les thèmes sont sombres (fond noir teinté) : seule la couleur néon
-   change. Les lueurs du fond (globals.css) sont dérivées de --primary /
-   --secondary / --accent via color-mix.
+   Tous les thèmes sont sombres (fond noir teinté) : seule la couleur d'accent
+   change. La lueur du fond (globals.css) est dérivée de --primary via
+   color-mix.
    =========================================================================== */
 
 /* --- Rose "Baddie" (défaut, aussi défini dans :root) ----------------------- */

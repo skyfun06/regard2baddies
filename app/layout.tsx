@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import localFont from "next/font/local";
+import { Geist, Geist_Mono, Playfair_Display } from "next/font/google";
 import { createClient } from "@/lib/supabase/server";
 import "./globals.css";
 
@@ -14,10 +13,10 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-// Police display Y2K (titres, chiffres, boutons). Auto-hébergée via next/font.
-const gagalin = localFont({
-  src: "./fonts/Gagalin-Regular.woff",
-  variable: "--font-gagalin",
+// Police display éditoriale (titres, wordmark, chiffres). Auto-hébergée via next/font.
+const playfair = Playfair_Display({
+  variable: "--font-playfair",
+  subsets: ["latin"],
   display: "swap",
 });
 
@@ -61,7 +60,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
     <html
       lang="fr"
       data-theme={theme}
-      className={`${geistSans.variable} ${geistMono.variable} ${gagalin.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${playfair.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">{children}</body>
     </html>

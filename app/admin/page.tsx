@@ -42,7 +42,7 @@ export default async function AdminDashboardPage() {
       {/* Qui a atteint le seuil */}
       <section className="y2k-card p-4">
         <div className="flex items-baseline justify-between gap-2">
-          <h2 className="y2k-display text-base text-primary">🎉 Récompenses prêtes</h2>
+          <h2 className="y2k-display text-base text-primary">Récompenses prêtes</h2>
           {pretes.length > 0 && (
             <Link
               href="/admin/clientes?seuil=1"
