@@ -27,8 +27,8 @@ export default function ReglagesForm({
   const [state, action, pending] = useActionState(updateReglages, undefined);
 
   return (
-    <form action={action} className="space-y-5">
-      <div className="space-y-1">
+    <form action={action} className="space-y-6">
+      <div className="space-y-2">
         <label htmlFor="seuil_passages" className="text-sm font-medium">
           Seuil de passages
         </label>
@@ -47,7 +47,7 @@ export default function ReglagesForm({
         />
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-2">
         <label htmlFor="valeur_recompense" className="text-sm font-medium">
           Valeur de la récompense (€)
         </label>
@@ -63,7 +63,7 @@ export default function ReglagesForm({
         />
       </div>
 
-      <div className="space-y-1">
+      <div className="space-y-2">
         <label htmlFor="theme_actif" className="text-sm font-medium">
           Thème saisonnier
         </label>

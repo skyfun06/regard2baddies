@@ -48,12 +48,14 @@ export default function GestionCliente({
   const prete = info.recompensesDisponibles >= 1;
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* En-tête */}
       <header>
         <p className="text-sm text-muted-foreground">Cliente</p>
-        <h1 className="y2k-display text-3xl text-primary">{info.prenom}</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <h1 className="y2k-display mt-1 text-3xl text-primary">
+          {info.prenom}
+        </h1>
+        <p className="mt-2 text-sm text-muted-foreground">
           {telephone ? telephone : "Pas de téléphone"}
           {" · "}
           {hasCompte ? "compte en ligne" : "sans compte"}
@@ -62,7 +64,7 @@ export default function GestionCliente({
 
       {/* Cases du cycle courant */}
       <section className="y2k-card p-6">
-        <div className="grid grid-cols-5 gap-3">
+        <div className="grid grid-cols-5 gap-4">
           {Array.from({ length: info.seuil }).map((_, i) => {
             const active = i < info.remplies;
             return (
@@ -75,7 +77,7 @@ export default function GestionCliente({
             );
           })}
         </div>
-        <p className="mt-5 text-center text-sm">
+        <p className="mt-6 text-center text-sm">
           {prete ? (
             <span className="font-semibold text-success">
               Récompense disponible : {info.valeurRecompense} €
@@ -94,7 +96,7 @@ export default function GestionCliente({
             </>
           )}
         </p>
-        <p className="mt-2 text-center text-xs text-muted-foreground">
+        <p className="mt-3 text-center text-xs text-muted-foreground">
           {info.totalPassages} passage{info.totalPassages > 1 ? "s" : ""} au
           total.
         </p>
@@ -107,9 +109,9 @@ export default function GestionCliente({
       )}
 
       {/* Corriger les points */}
-      <section className="space-y-3">
+      <section className="space-y-4">
         <h2 className="y2k-display text-base text-primary">Corriger les points</h2>
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-4">
           <button
             onClick={() => lancer(() => ajouterPassage(clienteId))}
             disabled={pending}
@@ -167,9 +169,9 @@ function ResetMotDePasse({
 
   if (!hasCompte) {
     return (
-      <section className="y2k-card p-4">
+      <section className="y2k-card p-5">
         <h2 className="y2k-display text-base text-primary">Mot de passe</h2>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-muted-foreground">
           Cette cliente n&apos;a pas de compte en ligne.
         </p>
       </section>
@@ -186,9 +188,9 @@ function ResetMotDePasse({
   }
 
   return (
-    <section className="y2k-card space-y-2 p-4">
+    <section className="y2k-card space-y-3 p-5">
       <h2 className="y2k-display text-base text-primary">Réinitialiser le mot de passe</h2>
-      <form onSubmit={soumettre} className="flex gap-2">
+      <form onSubmit={soumettre} className="flex gap-3">
         <input
           type="text"
           value={pwd}
@@ -233,14 +235,14 @@ function SupprimerCliente({
   const [pending, startTransition] = useTransition();
 
   return (
-    <section className="space-y-2 rounded-2xl border border-danger/50 bg-danger/5 p-4">
+    <section className="space-y-3 rounded-2xl border border-danger/50 bg-danger/5 p-5">
       <h2 className="y2k-display text-base text-danger">Supprimer la cliente</h2>
       <p className="text-sm text-muted-foreground">
         Supprime définitivement {prenom}, sa carte, ses passages et son compte.
         Irréversible.
       </p>
       {confirme ? (
-        <div className="flex gap-2">
+        <div className="flex gap-3">
           <button
             onClick={() =>
               startTransition(async () => {

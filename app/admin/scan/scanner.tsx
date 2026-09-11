@@ -130,10 +130,10 @@ export default function Scanner() {
   // --- Vue : caméra + saisie manuelle (aucune cliente sélectionnée) ---------
   if (!info) {
     return (
-      <div className="space-y-6">
+      <div className="space-y-8">
         <div>
           <h1 className="y2k-display text-2xl text-primary">Scanner</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
+          <p className="mt-2 text-sm text-muted-foreground">
             Vise le QR code de la carte de la cliente.
           </p>
         </div>
@@ -157,12 +157,12 @@ export default function Scanner() {
         {/* Saisie manuelle en secours si le scan échoue */}
         <form
           onSubmit={chercherManuel}
-          className="y2k-card space-y-2 p-4"
+          className="y2k-card space-y-3 p-5"
         >
           <label htmlFor="manual" className="text-sm font-medium">
             Le scan ne marche pas ? Saisis le code
           </label>
-          <div className="flex gap-2">
+          <div className="flex gap-3">
             <input
               id="manual"
               value={manual}
@@ -185,11 +185,13 @@ export default function Scanner() {
 
   // --- Vue : fiche de la cliente après identification -----------------------
   return (
-    <div className="space-y-6">
-      <header className="flex items-center justify-between">
+    <div className="space-y-8">
+      <header className="flex items-center justify-between gap-4">
         <div>
           <p className="text-sm text-muted-foreground">Cliente</p>
-          <h1 className="y2k-display text-3xl text-primary">{info.prenom}</h1>
+          <h1 className="y2k-display mt-1 text-3xl text-primary">
+            {info.prenom}
+          </h1>
         </div>
         <button
           onClick={nouvelleCliente}
@@ -201,7 +203,7 @@ export default function Scanner() {
 
       {/* Compteur de cases */}
       <section className="y2k-card p-6">
-        <div className="grid grid-cols-5 gap-3">
+        <div className="grid grid-cols-5 gap-4">
           {Array.from({ length: info.seuil }).map((_, i) => {
             const active = i < info.remplies;
             return (
@@ -215,7 +217,7 @@ export default function Scanner() {
           })}
         </div>
 
-        <p className="mt-5 text-center text-sm">
+        <p className="mt-6 text-center text-sm">
           {info.recompensesDisponibles >= 1 ? (
             <span className="font-semibold text-success">
               Récompense disponible : {info.valeurRecompense} €
@@ -243,7 +245,7 @@ export default function Scanner() {
       )}
 
       {/* Actions */}
-      <div className="space-y-3">
+      <div className="space-y-4">
         <button
           onClick={validerPassage}
           disabled={pending}
@@ -264,16 +266,16 @@ export default function Scanner() {
       </div>
 
       {/* Historique des passages */}
-      <section className="y2k-card p-4">
+      <section className="y2k-card p-5">
         <h2 className="y2k-display text-base text-primary">Derniers passages</h2>
         {info.historique.length === 0 ? (
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="mt-3 text-sm text-muted-foreground">
             Aucun passage pour l&apos;instant.
           </p>
         ) : (
-          <ul className="mt-2 divide-y divide-border text-sm">
+          <ul className="mt-3 divide-y divide-border text-sm">
             {info.historique.map((p) => (
-              <li key={p.id} className="py-2 text-muted-foreground">
+              <li key={p.id} className="py-2.5 text-muted-foreground">
                 {new Date(p.created_at).toLocaleString("fr-FR", {
                   dateStyle: "medium",
                   timeStyle: "short",
@@ -282,7 +284,7 @@ export default function Scanner() {
             ))}
           </ul>
         )}
-        <p className="mt-3 text-xs text-muted-foreground">
+        <p className="mt-4 text-xs text-muted-foreground">
           {info.totalPassages} passage{info.totalPassages > 1 ? "s" : ""} au
           total.
         </p>

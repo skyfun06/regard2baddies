@@ -13,7 +13,7 @@ export default async function InscriptionPage() {
 
   return (
     <main className="relative flex flex-1 items-center justify-center overflow-hidden p-6">
-      <div className="w-full max-w-sm space-y-6">
+      <div className="w-full max-w-sm space-y-8">
         <header className="text-center">
           <h1 className="y2k-wordmark text-4xl leading-tight">
             Regard
@@ -25,7 +25,7 @@ export default async function InscriptionPage() {
           </p>
         </header>
 
-        <div className="y2k-card p-6">
+        <div className="y2k-card p-7">
           <InscriptionForm />
         </div>
       </div>

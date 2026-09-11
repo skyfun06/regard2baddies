@@ -80,15 +80,15 @@ export default async function CartePage() {
   });
 
   return (
-    <main className="relative flex flex-1 flex-col items-center overflow-hidden p-6">
-      <div className="w-full max-w-sm space-y-6">
+    <main className="relative flex flex-1 flex-col items-center overflow-hidden px-6 py-10">
+      <div className="w-full max-w-sm space-y-8">
         {/* En-tête */}
-        <header className="flex items-end justify-between">
+        <header className="flex items-end justify-between gap-4">
           <div>
             <span className="y2k-chip text-xs font-medium text-muted-foreground">
               Ta carte
             </span>
-            <h1 className="y2k-display mt-2 text-4xl text-primary">
+            <h1 className="y2k-display mt-3 text-4xl text-primary">
               {cliente.prenom}
             </h1>
           </div>
@@ -101,7 +101,7 @@ export default async function CartePage() {
 
         {/* Cases de fidélité — le sticker signature */}
         <section className="y2k-card p-6">
-          <div className="grid grid-cols-5 gap-3">
+          <div className="grid grid-cols-5 gap-4">
             {Array.from({ length: seuil }).map((_, i) => {
               const active = i < remplies;
               return (
@@ -116,7 +116,7 @@ export default async function CartePage() {
             })}
           </div>
 
-          <p className="mt-5 text-center text-sm">
+          <p className="mt-6 text-center text-sm">
             {recompensePrete ? (
               <span className="y2k-display text-base text-success">
                 Récompense débloquée : {valeur} € offerts !
@@ -137,17 +137,17 @@ export default async function CartePage() {
         {/* Code à faire scanner par Léa */}
         <section className="y2k-card p-6 text-center">
           <p className="y2k-display text-lg text-primary">Ton code</p>
-          <p className="mt-1 text-xs text-muted-foreground">
+          <p className="mt-2 text-xs text-muted-foreground">
             Montre-le à Léa à chaque passage.
           </p>
-          <div className="mx-auto mt-4 w-48 rounded-xl border border-border bg-white p-3">
+          <div className="mx-auto mt-5 w-48 rounded-xl border border-border bg-white p-3">
             <div
               className="[&>svg]:h-auto [&>svg]:w-full"
               // QR généré côté serveur : contenu SVG sûr (pas d'entrée utilisateur).
               dangerouslySetInnerHTML={{ __html: qrSvg }}
             />
           </div>
-          <div className="mt-4 break-all rounded-xl bg-muted px-4 py-2 font-mono text-xs tracking-wider text-muted-foreground">
+          <div className="mt-5 break-all rounded-xl bg-muted px-4 py-2.5 font-mono text-xs tracking-wider text-muted-foreground">
             {cliente.token}
           </div>
         </section>

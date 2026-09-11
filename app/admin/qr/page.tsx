@@ -32,8 +32,8 @@ export default async function QrPage() {
   });
 
   return (
-    <section className="space-y-5">
-      <div className="flex items-baseline justify-between gap-3 print:hidden">
+    <section className="space-y-6">
+      <div className="flex items-baseline justify-between gap-4 print:hidden">
         <h1 className="y2k-display text-2xl text-primary">QR d&apos;inscription</h1>
         <PrintButton />
       </div>
@@ -45,7 +45,7 @@ export default async function QrPage() {
       {/* Carte imprimable : centrée et sobre pour le papier. */}
       <div className="y2k-card mx-auto max-w-xs p-8 text-center print:border-0 print:shadow-none">
         <p className="y2k-wordmark text-2xl">Regard2Baddies</p>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-muted-foreground">
           Scanne-moi pour ta carte de fidélité
         </p>
         <div

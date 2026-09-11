@@ -17,10 +17,10 @@ export default async function ReglagesPage() {
     .maybeSingle();
 
   return (
-    <section className="space-y-5">
+    <section className="space-y-6">
       <div>
         <h1 className="y2k-display text-2xl text-primary">Réglages</h1>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-muted-foreground">
           Ces valeurs s&apos;appliquent à toutes les cartes.
         </p>
       </div>

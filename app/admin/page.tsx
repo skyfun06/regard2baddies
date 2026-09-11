@@ -19,29 +19,31 @@ export default async function AdminDashboardPage() {
   const pretes = clientes.filter((c) => c.recompensesDisponibles >= 1);
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-8">
       <h1 className="y2k-display text-2xl text-primary">Tableau de bord</h1>
 
       {/* Compteurs */}
-      <div className="grid grid-cols-2 gap-3">
-        <div className="y2k-card p-4">
+      <div className="grid grid-cols-2 gap-4">
+        <div className="y2k-card p-5">
           <p className="y2k-display text-3xl text-primary">{clientes.length}</p>
-          <p className="text-sm text-muted-foreground">
+          <p className="mt-1 text-sm text-muted-foreground">
             cliente{clientes.length > 1 ? "s" : ""}
           </p>
         </div>
         <Link
           href="/admin/clientes?seuil=1"
-          className="y2k-card p-4 transition hover:brightness-[1.02]"
+          className="y2k-card p-5 transition hover:brightness-[1.02]"
         >
           <p className="y2k-display text-3xl text-success">{pretes.length}</p>
-          <p className="text-sm text-muted-foreground">ont atteint le seuil</p>
+          <p className="mt-1 text-sm text-muted-foreground">
+            ont atteint le seuil
+          </p>
         </Link>
       </div>
 
       {/* Qui a atteint le seuil */}
-      <section className="y2k-card p-4">
-        <div className="flex items-baseline justify-between gap-2">
+      <section className="y2k-card p-5">
+        <div className="flex items-baseline justify-between gap-3">
           <h2 className="y2k-display text-base text-primary">Récompenses prêtes</h2>
           {pretes.length > 0 && (
             <Link
@@ -53,16 +55,16 @@ export default async function AdminDashboardPage() {
           )}
         </div>
         {pretes.length === 0 ? (
-          <p className="mt-2 text-sm text-muted-foreground">
+          <p className="mt-3 text-sm text-muted-foreground">
             Aucune récompense à remettre pour l&apos;instant.
           </p>
         ) : (
-          <ul className="mt-2 divide-y divide-border text-sm">
+          <ul className="mt-3 divide-y divide-border text-sm">
             {pretes.slice(0, 5).map((c) => (
               <li key={c.id}>
                 <Link
                   href={`/admin/clientes/${c.id}`}
-                  className="flex items-center justify-between py-2"
+                  className="flex items-center justify-between py-3"
                 >
                   <span className="font-medium">{c.prenom}</span>
                   <span className="text-success">
@@ -80,15 +82,15 @@ export default async function AdminDashboardPage() {
       {/* Réglages courants */}
       <Link
         href="/admin/reglages"
-        className="y2k-card block p-4 transition hover:brightness-[1.02]"
+        className="y2k-card block p-5 transition hover:brightness-[1.02]"
       >
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-3">
           <h2 className="y2k-display text-base text-primary">Réglages</h2>
           <span className="text-sm text-muted-foreground underline">
             Modifier
           </span>
         </div>
-        <p className="mt-1 text-sm text-muted-foreground">
+        <p className="mt-2 text-sm text-muted-foreground">
           Seuil : {reglages?.seuil_passages ?? 5} passages · Récompense :{" "}
           {reglages?.valeur_recompense ?? 20} € · Thème :{" "}
           {reglages?.theme_actif ?? "rose"}
@@ -96,7 +98,7 @@ export default async function AdminDashboardPage() {
       </Link>
 
       {/* Accès rapides */}
-      <div className="grid grid-cols-2 gap-3">
+      <div className="grid grid-cols-2 gap-4">
         <Link
           href="/admin/scan"
           className="y2k-btn p-4 text-center text-lg"

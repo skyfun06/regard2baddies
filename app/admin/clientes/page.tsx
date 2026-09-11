@@ -17,8 +17,8 @@ export default async function ClientesPage({
   const clientes = await listerClientes(q, seulSeuil);
 
   return (
-    <section className="space-y-5">
-      <div className="flex items-baseline justify-between gap-3">
+    <section className="space-y-6">
+      <div className="flex items-baseline justify-between gap-4">
         <h1 className="y2k-display text-2xl text-primary">Clientes</h1>
         <span className="text-sm text-muted-foreground">
           {clientes.length} au total
@@ -26,7 +26,7 @@ export default async function ClientesPage({
       </div>
 
       {/* Recherche par prénom (GET : le prénom reste dans l'URL, partageable) */}
-      <form method="get" className="flex gap-2">
+      <form method="get" className="flex gap-3">
         {seulSeuil && <input type="hidden" name="seuil" value="1" />}
         <input
           name="q"
@@ -44,7 +44,7 @@ export default async function ClientesPage({
       </form>
 
       {/* Filtre : uniquement celles ayant atteint le seuil */}
-      <div className="flex gap-2 text-sm">
+      <div className="flex gap-3 text-sm">
         <FiltreLien label="Toutes" actif={!seulSeuil} q={q} seuil={false} />
         <FiltreLien
           label="Récompense prête"
@@ -55,7 +55,7 @@ export default async function ClientesPage({
       </div>
 
       {clientes.length === 0 ? (
-        <p className="y2k-card p-6 text-center text-sm text-muted-foreground">
+        <p className="y2k-card p-8 text-center text-sm text-muted-foreground">
           Aucune cliente ne correspond.
         </p>
       ) : (
@@ -124,7 +124,7 @@ function FiltreLien({
     <Link
       href={href}
       className={
-        "rounded-full border px-3 py-1 transition " +
+        "rounded-full border px-3.5 py-1.5 transition " +
         (actif
           ? "border-primary bg-primary/10 font-semibold text-primary"
           : "border-border bg-surface text-muted-foreground hover:border-primary hover:text-primary")

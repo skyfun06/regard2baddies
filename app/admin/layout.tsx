@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { requireAdmin } from "@/lib/supabase/auth";
 import { logout } from "@/lib/auth-actions";
+import NavLinks from "./nav-links";
 
 /**
  * Coquille commune de l'espace admin.
@@ -16,43 +17,25 @@ export default async function AdminLayout({
 
   return (
     <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-10 border-b border-white/15 bg-surface/85 backdrop-blur print:hidden">
-        <nav className="mx-auto flex max-w-2xl flex-wrap items-center gap-x-3 gap-y-2 p-4 text-sm">
-          <Link href="/admin" className="y2k-display text-lg text-primary">
-            Admin
-          </Link>
-          <Link
-            href="/admin/scan"
-            className="y2k-chip text-muted-foreground transition hover:text-primary"
-          >
-            Scanner
-          </Link>
-          <Link
-            href="/admin/clientes"
-            className="y2k-chip text-muted-foreground transition hover:text-primary"
-          >
-            Clientes
-          </Link>
-          <Link
-            href="/admin/reglages"
-            className="y2k-chip text-muted-foreground transition hover:text-primary"
-          >
-            Réglages
-          </Link>
-          <Link
-            href="/admin/qr"
-            className="y2k-chip text-muted-foreground transition hover:text-primary"
-          >
-            QR
-          </Link>
-          <form action={logout} className="ml-auto">
-            <button className="text-muted-foreground underline">
-              Déconnexion
-            </button>
-          </form>
-        </nav>
+      <header className="sticky top-0 z-10 border-b border-border bg-background/80 backdrop-blur print:hidden">
+        <div className="mx-auto max-w-2xl px-4">
+          <div className="flex items-center justify-between gap-4 pt-4">
+            <Link href="/admin" className="flex items-baseline gap-2">
+              <span className="y2k-wordmark text-base">Regard2Baddies</span>
+              <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-muted-foreground">
+                Admin
+              </span>
+            </Link>
+            <form action={logout}>
+              <button className="text-xs font-medium uppercase tracking-wider text-muted-foreground transition hover:text-foreground">
+                Déconnexion
+              </button>
+            </form>
+          </div>
+          <NavLinks />
+        </div>
       </header>
-      <main className="mx-auto w-full max-w-2xl flex-1 p-4">{children}</main>
+      <main className="mx-auto w-full max-w-2xl flex-1 px-4 py-8">{children}</main>
     </div>
   );
 }
